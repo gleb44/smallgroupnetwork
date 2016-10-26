@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <query name="Study.incrementViewsCount"><![CDATA[
+        UPDATE Study s SET s.viewsCount = s.viewsCount + 1
+        WHERE s.id = :studyId
+        ]]>
+    </query>
+
+    <query name="SearchRequest.increment"><![CDATA[
+        UPDATE SearchRequest s SET s.amount = s.amount + 1, lastSearched = now()
+        WHERE s.id = :id
+        ]]>
+    </query>
+
+    <sql-query name="Study.fullTextSearch">
+        <![CDATA[
+            SELECT id,
+                   created,
+                   title,
+                   description,
+	               speaker,
+	               link,
+	               start_min,
+	               start_sec,
+	               views_count
+            FROM (SELECT s.*,
+                         setweight(to_tsvector(title), 'A') ||
+                         setweight(to_tsvector(description), 'B') ||
+                         setweight(to_tsvector('simple', speaker), 'C')  as document
+                  FROM study s
+                  ) p_search
+            WHERE p_search.document @@ to_tsquery(:searchPattern)
+	    ]]>
+    </sql-query>
+
+</hibernate-mapping>

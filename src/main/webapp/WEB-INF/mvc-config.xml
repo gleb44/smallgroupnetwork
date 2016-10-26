@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
+		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <context:property-placeholder location="classpath:/app.properties"/>
+
+    <!-- Spring Controllers  -->
+    <context:component-scan base-package="com.smallgroupnetwork.web.controller,com.smallgroupnetwork.web.listener"/>
+
+    <task:annotation-driven executor="executor" scheduler="scheduler"/>
+    <task:executor id="executor" pool-size="40"/>
+    <task:scheduler id="scheduler" pool-size="10"/>
+
+    <!---->
+
+    <mvc:resources mapping="/app/**" location="/app/" order="0" cache-period="${ui.cache.period}"/>
+    <mvc:resources mapping="/assets/**" location="/assets/" order="0" cache-period="${ui.cache.period}"/>
+    <mvc:resources mapping="/css/**" location="/css/" order="0" cache-period="${ui.cache.period}"/>
+    <mvc:resources mapping="/fonts/**" location="/fonts/" order="0" cache-period="${ui.cache.period}"/>
+    <mvc:resources mapping="/js/**" location="/js/" order="0" cache-period="${ui.cache.period}"/>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="jacksonObjectMapper"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/api/**"/>
+            <bean class="com.smallgroupnetwork.web.interceptor.JsonNoCacheInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/api/admin/**"/>
+            <mvc:exclude-mapping path="/api/admin/account/**"/>
+            <bean class="com.smallgroupnetwork.web.interceptor.AdminAuthorizationInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- Only needed because we require fileupload in the org.springframework.samples.mvc.fileupload package -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- Max upload file size in bytes -->
+        <!--<property name="maxUploadSize" value="3000000000"/>-->
+    </bean>
+
+    <util:properties id="gitProperties" location="classpath:git.properties"/>
+
+    <util:map id="staticAttributesMap">
+        <entry key="livereloadUrl" value="${livereload.url}"/>
+        <entry key="baseUrl" value="${ui.base.url}"/>
+        <entry key="addThisKey" value="${add.this.key}"/>
+        <entry key="buildEnv" value="${build.env}"/>
+        <entry key="gitProperties" value-ref="gitProperties"/>
+    </util:map>
+
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"
+          p:templateLoaderPath="/WEB-INF/views/"
+          p:defaultEncoding="UTF-8"
+          p:freemarkerVariables-ref="staticAttributesMap"/>
+
+    <bean id="ftlViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="order" value="1"/>
+        <property name="suffix" value=".ftl"/>
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="contentType">
+            <value>text/html; charset=UTF-8</value>
+        </property>
+    </bean>
+
+    <!-- Aspect Methods -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+</beans>
