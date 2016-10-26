@@ -15,6 +15,7 @@ import {AccountService} from '../shared/service/account.service';
 })
 
 export class HomeComponent implements OnInit {
+  isDarkTheme: boolean = false;
 
   newName: string = '';
   password: string = '';

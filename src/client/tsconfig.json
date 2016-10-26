@@ -11,7 +11,7 @@
     "pretty": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "noImplicitAny": true,
+//    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true,
@@ -23,7 +23,8 @@
       "core-js",
       "express",
       "node",
-      "systemjs"
+      "systemjs",
+      "hammerjs"
     ]
   },
   "exclude": [

@@ -6,8 +6,10 @@ import { NameListService } from '../shared/name-list/index';
 
 import {AccountService} from '../shared/service/account.service';
 
+import { MaterialModule } from '@angular/material';
+
 @NgModule({
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, MaterialModule.forRoot()],
   declarations: [HomeComponent],
   exports: [HomeComponent],
   providers: [NameListService, AccountService]
