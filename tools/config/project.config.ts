@@ -1,14 +1,15 @@
 import { join } from 'path';
 import * as slash from 'slash';
+import * as util from 'gulp-util';
 import { argv } from 'yargs';
 
-import { Environments, ExtendPackages, InjectableDependency } from './project.config.interfaces';
+import { BuildType, ExtendPackages, InjectableDependency } from './project.config.interfaces';
 
 /**
  * The enumeration of available environments.
- * @type {Environments}
+ * @type {BuildType}
  */
-export const ENVIRONMENTS: Environments = {
+export const BUILD_TYPES: BuildType = {
   DEVELOPMENT: 'dev',
   PRODUCTION: 'prod'
 };
@@ -39,10 +40,10 @@ export class ProjectConfig {
   PROJECT_ROOT = join(__dirname, '../..');
 
   /**
-   * The current environment.
-   * The default environment is `dev`, which can be overriden by the `--config-env ENV_NAME` flag when running `npm start`.
+   * The current build type.
+   * The default build type is `dev`, which can be overriden by the `--build-type dev|prod` flag when running `npm start`.
    */
-  ENV = getEnvironment();
+  BUILD_TYPE = getBuildType();
 
   /**
    * The flag for the debug option of the application.
@@ -176,7 +177,7 @@ export class ProjectConfig {
    * The folder for the built files, corresponding to the current environment.
    * @type {string}
    */
-  APP_DEST = this.ENV === ENVIRONMENTS.DEVELOPMENT ? this.DEV_DEST : this.PROD_DEST;
+  APP_DEST = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT ? this.DEV_DEST : this.PROD_DEST;
 
   /**
    * The folder for the built CSS files.
@@ -250,9 +251,9 @@ export class ProjectConfig {
   NPM_DEPENDENCIES: InjectableDependency[] = [
     { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'core-js/client/shim.min.js', inject: 'shims' },
-    { src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
+    { src: 'systemjs/dist/system.src.js', inject: 'shims', buildType: BUILD_TYPES.DEVELOPMENT },
     // Temporary fix. See https://github.com/angular/angular/issues/9359
-    { src: '.tmp/Rx.min.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT }
+    { src: '.tmp/Rx.min.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT }
   ];
 
   /**
@@ -277,8 +278,8 @@ export class ProjectConfig {
    * @return {InjectableDependency[]} The array of npm dependencies and assets.
    */
   get DEPENDENCIES(): InjectableDependency[] {
-    return normalizeDependencies(this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, this.ENV)))
-        .concat(this.APP_ASSETS.filter(filterDependency.bind(null, this.ENV)));
+    return normalizeDependencies(this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, this.BUILD_TYPE)))
+        .concat(this.APP_ASSETS.filter(filterDependency.bind(null, this.BUILD_TYPE)));
   }
 
   /**
@@ -480,8 +481,9 @@ export class ProjectConfig {
   }
 
   getInjectableStyleExtension() {
-    return this.ENV === ENVIRONMENTS.PRODUCTION && this.ENABLE_SCSS ? 'scss' : 'css';
+    return this.BUILD_TYPE === BUILD_TYPES.PRODUCTION && this.ENABLE_SCSS ? 'scss' : 'css';
   }
+
 }
 
 /**
@@ -501,14 +503,16 @@ export function normalizeDependencies(deps: InjectableDependency[]) {
  * @param  {InjectableDependency} d   - The dependency to check.
  * @return {boolean}                    `true` if the dependency is used in this environment, `false` otherwise.
  */
-function filterDependency(env: string, d: InjectableDependency): boolean {
-  if (!d.env) {
-    d.env = Object.keys(ENVIRONMENTS).map(k => ENVIRONMENTS[k]);
+function filterDependency(type: string, d: InjectableDependency): boolean {
+  const t = d.buildType;
+  d.buildType = t;
+  if (!t) {
+    d.buildType = Object.keys(BUILD_TYPES).map(k => BUILD_TYPES[k]);
   }
-  if (!(d.env instanceof Array)) {
-    (<any>d).env = [d.env];
+  if (!(d.buildType instanceof Array)) {
+    (<any>d).env = [d.buildType];
   }
-  return d.env.indexOf(env) >= 0;
+  return d.buildType.indexOf(type) >= 0;
 }
 
 /**
@@ -521,16 +525,16 @@ function appVersion(): number | string {
 }
 
 /**
- * Returns the environment of the application.
+ * Returns the application build type.
  */
-function getEnvironment() {
+function getBuildType() {
+  let type = (argv['build-type'] || argv['env'] || '').toLowerCase();
   let base: string[] = argv['_'];
-  let prodKeyword = !!base.filter(o => o.indexOf(ENVIRONMENTS.PRODUCTION) >= 0).pop();
-  let env = (argv['env'] || '').toLowerCase();
-  if ((base && prodKeyword) || env === ENVIRONMENTS.PRODUCTION) {
-    return ENVIRONMENTS.PRODUCTION;
+  let prodKeyword = !!base.filter(o => o.indexOf(BUILD_TYPES.PRODUCTION) >= 0).pop();
+  if ((base && prodKeyword) || type === BUILD_TYPES.PRODUCTION) {
+    return BUILD_TYPES.PRODUCTION;
   } else {
-    return ENVIRONMENTS.DEVELOPMENT;
+    return BUILD_TYPES.DEVELOPMENT;
   }
 }
 
