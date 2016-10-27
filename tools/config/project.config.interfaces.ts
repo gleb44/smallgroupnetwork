@@ -10,9 +10,3 @@ export interface BuildType {
   PRODUCTION: string;
   [key: string]: string;
 }
-
-export interface ExtendPackages {
-  name: string;
-  path?: string;
-  packageMeta?: any;
-}

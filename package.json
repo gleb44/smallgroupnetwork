@@ -11,7 +11,6 @@
     "build.dev.watch": "gulp build.dev.watch --color",
     "build.prod": "gulp build.prod --color --env-config prod --build-type prod",
     "build.prod.exp": "gulp build.prod.exp --color --env-config prod --build-type prod",
-    "generate.manifest": "gulp generate.manifest --color",
     "gulp": "gulp",
     "lint": "gulp tslint",
     "postinstall": "gulp check.versions && gulp build.bundle.rxjs && npm prune",

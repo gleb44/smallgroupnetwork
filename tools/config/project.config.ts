@@ -3,7 +3,7 @@ import * as slash from 'slash';
 import * as util from 'gulp-util';
 import { argv } from 'yargs';
 
-import { BuildType, ExtendPackages, InjectableDependency } from './project.config.interfaces';
+import { BuildType, InjectableDependency } from './project.config.interfaces';
 
 /**
  * The enumeration of available environments.
@@ -231,7 +231,7 @@ export class ProjectConfig {
    * The default value is false. Override with the '--scss' flag.
    * @type {boolean}
    */
-  ENABLE_SCSS = true; //argv['scss'] || false;
+  ENABLE_SCSS = argv['scss'] || true;
 
   /**
    * The folder for the built Fonts files.
