@@ -259,7 +259,11 @@ export class ProjectConfig {
     { src: 'core-js/client/shim.min.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', buildType: BUILD_TYPES.DEVELOPMENT },
     // Temporary fix. See https://github.com/angular/angular/issues/9359
-    { src: '.tmp/Rx.min.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT }
+    { src: '.tmp/Rx.min.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT },
+
+    { src: 'primeng/resources/primeng.min.css', inject: true },
+    { src: 'primeng/resources/themes/bootstrap/theme.css', inject: true },
+    { src: 'font-awesome/css/font-awesome.min.css', inject: true }
   ];
 
   /**
@@ -306,6 +310,7 @@ export class ProjectConfig {
       '@angular/router': 'node_modules/@angular/router/bundles/router.umd.js',
 
       '@angular/material': 'node_modules/@angular/material/material.umd.js',
+      'primeng': 'node_modules/primeng/primeng.js',
 
       '@angular/common/testing': 'node_modules/@angular/common/bundles/common-testing.umd.js',
       '@angular/compiler/testing': 'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
@@ -319,9 +324,15 @@ export class ProjectConfig {
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*'
-    },
-    packages: {
     }
+    // map: {
+    //   'primeng': 'node_modules/primeng'
+    // },
+    // packages: {
+    //   'primeng': {
+    //     defaultExtension: 'js'
+    //   }
+    // }
   };
 
   SYSTEM_CONFIG_DEV_MODIFIED: string = JSON.stringify(this.SYSTEM_CONFIG_DEV, function(k, v) {

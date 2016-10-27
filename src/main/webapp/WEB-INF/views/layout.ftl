@@ -13,7 +13,14 @@
     <meta name="description" content="FaithInquest">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
 
+<#if buildEnv?? && buildEnv == 'prod'>
     <link rel="stylesheet" href="css/main.css">
+<#else >
+    <link rel="stylesheet" href="css/primeng.min.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</#if>
 
     <script type="application/javascript">
         window.AppConfig = {

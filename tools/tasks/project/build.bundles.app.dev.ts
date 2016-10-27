@@ -41,7 +41,7 @@ export = (done: any) => {
                 .map(d => join(Config.PROJECT_ROOT, 'node_modules', d));
 
             for (var item of paths) {
-                console.log(item);
+                console.log('-----> ' + item);
             }
 
             gulp.src(paths, {base: './node_modules'})

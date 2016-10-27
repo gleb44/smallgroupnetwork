@@ -7,9 +7,10 @@ import { NameListService } from '../shared/name-list/index';
 import {AccountService} from '../shared/service/account.service';
 
 import { MaterialModule } from '@angular/material';
+import {InputTextModule} from 'primeng/primeng';
 
 @NgModule({
-  imports: [CommonModule, SharedModule, MaterialModule.forRoot()],
+  imports: [CommonModule, SharedModule, MaterialModule.forRoot(), InputTextModule],
   declarations: [HomeComponent],
   exports: [HomeComponent],
   providers: [NameListService, AccountService]
