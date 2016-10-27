@@ -11,7 +11,7 @@ import { TypeScriptTask } from '../typescript_task';
 
 const plugins = <any>gulpLoadPlugins();
 
-const jsonSystemConfig = JSON.stringify(Config.SYSTEM_CONFIG_DEV);
+const jsonSystemConfig = JSON.stringify(Config.SYSTEM_BUILDER_CONFIG_DEV);
 
 let typedBuildCounter = Config.TYPED_COMPILE_INTERVAL; // Always start with the typed build.
 

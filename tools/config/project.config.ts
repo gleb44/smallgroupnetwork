@@ -296,7 +296,38 @@ export class ProjectConfig {
    * The configuration of SystemJS for the `dev` environment.
    * @type {any}
    */
-  SYSTEM_CONFIG_DEV: any = {
+  // SYSTEM_CONFIG_DEV: any = {
+  //   defaultJSExtensions: true,
+  //   paths: {
+  //     [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
+  //     '@angular/common': 'node_modules/@angular/common/bundles/common.umd.js',
+  //     '@angular/compiler': 'node_modules/@angular/compiler/bundles/compiler.umd.js',
+  //     '@angular/core': 'node_modules/@angular/core/bundles/core.umd.js',
+  //     '@angular/forms': 'node_modules/@angular/forms/bundles/forms.umd.js',
+  //     '@angular/http': 'node_modules/@angular/http/bundles/http.umd.js',
+  //     '@angular/platform-browser': 'node_modules/@angular/platform-browser/bundles/platform-browser.umd.js',
+  //     '@angular/platform-browser-dynamic': 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+  //     '@angular/router': 'node_modules/@angular/router/bundles/router.umd.js',
+  //
+  //     '@angular/material': 'node_modules/@angular/material/material.umd.js',
+  //     'primeng': 'node_modules/primeng/primeng.js',
+  //
+  //     '@angular/common/testing': 'node_modules/@angular/common/bundles/common-testing.umd.js',
+  //     '@angular/compiler/testing': 'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
+  //     '@angular/core/testing': 'node_modules/@angular/core/bundles/core-testing.umd.js',
+  //     '@angular/http/testing': 'node_modules/@angular/http/bundles/http-testing.umd.js',
+  //     '@angular/platform-browser/testing': 'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
+  //     '@angular/platform-browser-dynamic/testing': 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+  //     '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
+  //
+  //     'app/*': '/app/*',
+  //     // For test config
+  //     'dist/dev/*': '/base/dist/dev/*',
+  //     '*': 'node_modules/*'
+  //   }
+  // };
+
+  SYSTEM_BUILDER_CONFIG_DEV:any = {
     defaultJSExtensions: true,
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
@@ -312,30 +343,21 @@ export class ProjectConfig {
       '@angular/material': 'node_modules/@angular/material/material.umd.js',
       'primeng': 'node_modules/primeng/primeng.js',
 
-      '@angular/common/testing': 'node_modules/@angular/common/bundles/common-testing.umd.js',
-      '@angular/compiler/testing': 'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
-      '@angular/core/testing': 'node_modules/@angular/core/bundles/core-testing.umd.js',
-      '@angular/http/testing': 'node_modules/@angular/http/bundles/http-testing.umd.js',
-      '@angular/platform-browser/testing': 'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
-      '@angular/platform-browser-dynamic/testing': 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
-      '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
+      // '@angular/common/testing': 'node_modules/@angular/common/bundles/common-testing.umd.js',
+      // '@angular/compiler/testing': 'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
+      // '@angular/core/testing': 'node_modules/@angular/core/bundles/core-testing.umd.js',
+      // '@angular/http/testing': 'node_modules/@angular/http/bundles/http-testing.umd.js',
+      // '@angular/platform-browser/testing': 'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
+      // '@angular/platform-browser-dynamic/testing': 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+      // '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
+      [`${this.DEV_DEST}/app/*`]: `${this.DEV_DEST}/app/*`,
       'app/*': '/app/*',
-      // For test config
-      'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*'
     }
-    // map: {
-    //   'primeng': 'node_modules/primeng'
-    // },
-    // packages: {
-    //   'primeng': {
-    //     defaultExtension: 'js'
-    //   }
-    // }
   };
 
-  SYSTEM_CONFIG_DEV_MODIFIED: string = JSON.stringify(this.SYSTEM_CONFIG_DEV, function(k, v) {
+  SYSTEM_CONFIG_DEV_MODIFIED: string = JSON.stringify(this.SYSTEM_BUILDER_CONFIG_DEV, function(k, v) {
     return (typeof v === 'string') ? v.replace('node_modules', 'js') : v;
   });
 
@@ -344,7 +366,7 @@ export class ProjectConfig {
    * Per default, the configuration of the `dev` environment will be used.
    * @type {any}
    */
-  SYSTEM_CONFIG: any = this.SYSTEM_CONFIG_DEV;
+  SYSTEM_CONFIG: any = this.SYSTEM_BUILDER_CONFIG_DEV;
 
   /**
    * The system builder configuration of the application.
