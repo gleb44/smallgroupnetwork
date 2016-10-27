@@ -35,6 +35,7 @@ export let changeFileManager = new ChangeFileManager();
  * Initialises BrowserSync with the configuration defined in seed.config.ts (or if overriden: project.config.ts).
  */
 let runServer = () => {
+  console.log('Run browser-sync');
   browserSync.init(Config.getPluginConfig('browser-sync'));
 };
 
@@ -71,7 +72,7 @@ let changed = (files: any) => {
   // } else {
   //TODO: Figure out why you can't pass a file to reload
   // if (onlyStylesChanged === false) {
-    browserSync.reload(files);
+  browserSync.reload(files);
   // } else {
   //   browserSync.reload('*.css');
   // }

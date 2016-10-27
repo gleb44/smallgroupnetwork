@@ -74,6 +74,12 @@ export class ProjectConfig {
    */
   HOT_LOADER_PORT = 5578;
 
+  BROWSER_SYNC_PROXY = 'zog.saddleback.com:8080';
+
+  BROWSER_SYNC_HOST = 'zog.saddleback.com';
+
+  BROWSER_SYNC_PORT = 8081;
+
   /**
    * The build interval which will force the TypeScript compiler to perform a typed compile run.
    * Between the typed runs, a typeless compile is run, which is typically much faster.
@@ -429,19 +435,24 @@ export class ProjectConfig {
       middleware: [require('connect-history-api-fallback')({
                                                              index: `${this.APP_BASE}index.html`
                                                            })],
-      port: this.PORT,
+      proxy: {
+        target: this.BROWSER_SYNC_PROXY,
+        ws: true
+      },
+      host: this.BROWSER_SYNC_HOST,
+      port: this.BROWSER_SYNC_PORT,
       startPath: this.APP_BASE,
-      open: argv['b'] ? false : true,
+      open: 'external',
       injectChanges: false,
-      server: {
-        baseDir: `${this.DIST_DIR}/empty/`,
-        routes: {
-          [`${this.APP_BASE}${this.APP_SRC}`]: this.APP_SRC,
-          [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
-          [`${this.APP_BASE}node_modules`]: 'node_modules',
-          [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
-        }
-      }
+      // server: {
+      //   baseDir: `${this.DIST_DIR}/empty/`,
+      //   routes: {
+      //     [`${this.APP_BASE}${this.APP_SRC}`]: this.APP_SRC,
+      //     [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
+      //     [`${this.APP_BASE}node_modules`]: 'node_modules',
+      //     [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
+      //   }
+      // }
     },
 
     // Note: you can customize the location of the file
