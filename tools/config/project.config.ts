@@ -124,7 +124,7 @@ export class ProjectConfig {
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE = 'Welcome to angular2-seed!';
+  APP_TITLE = 'Small Group Network';
 
   /**
    * The base folder of the applications source files.

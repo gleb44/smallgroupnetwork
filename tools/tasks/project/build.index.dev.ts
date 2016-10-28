@@ -1,6 +1,6 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
-import { join } from 'path';
+import { join, sep, normalize } from 'path';
 import * as slash from 'slash';
 
 import Config from '../../config';
@@ -13,12 +13,12 @@ const plugins = <any>gulpLoadPlugins();
  * Executes the build process, injecting the shims and libs into the `index.hml` for the development environment.
  */
 export = () => {
-  return gulp.src(join(Config.APP_SRC, 'index.html'))
+  return gulp.src(join(Config.APP_SRC, 'index.ftl'))
     .pipe(inject('shims'))
     .pipe(inject('libs'))
     .pipe(inject())
     .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(Config.APP_DEST));
+    .pipe(gulp.dest(join(Config.APP_DEST, 'WEB-INF', 'views')));
 };
 
 /**
@@ -64,6 +64,14 @@ function transformPath() {
   return function (filepath: string) {
     if (filepath.startsWith(`/${Config.APP_DEST}`)) {
       filepath = filepath.replace(`/${Config.APP_DEST}`, '');
+    }
+    if (filepath.startsWith('/node_modules')) {
+      if(filepath.endsWith('.js')) {
+        filepath = filepath.replace('/node_modules', 'js');
+      } else if(filepath.endsWith('.css')) {
+        let path: Array<string> = normalize(filepath).split(sep);
+        filepath = `css/${path[path.length - 1]}`;
+      }
     }
     arguments[0] = join(Config.APP_BASE, filepath) + `?${Date.now()}`;
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));

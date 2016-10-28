@@ -52,6 +52,7 @@ src/main/webapp/css
 src/main/webapp/fonts
 src/main/webapp/js
 src/main/webapp/index.html
+src/main/webapp/WEB-INF/views/index.ftl
 src/main/webapp/tsconfig.json
 src/main/resources/git.properties
 

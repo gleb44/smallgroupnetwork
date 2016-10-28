@@ -26,7 +26,7 @@ public class LayoutController
 		}
 		else
 		{
-			return "layout";
+			return "index";
 		}
 	}
 }

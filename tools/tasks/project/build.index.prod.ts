@@ -13,11 +13,11 @@ const plugins = <any>gulpLoadPlugins();
  * environment.
  */
 export = () => {
-  return gulp.src(join(Config.APP_SRC, 'index.html'))
+  return gulp.src(join(Config.APP_SRC, 'index.ftl'))
     .pipe(injectJs())
     .pipe(injectCss())
     .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(Config.APP_DEST));
+    .pipe(gulp.dest(join(Config.APP_DEST, 'WEB-INF', 'views')));
 };
 
 /**
@@ -54,9 +54,9 @@ function transformPath() {
     let path: Array<string> = normalize(filepath).split(sep);
     let slice_after = path.indexOf(Config.APP_DEST);
     if (slice_after>-1) {
-      slice_after++;
+      slice_after += 2;
     } else {
-      slice_after = 3;
+      slice_after = 4;
     }
     arguments[0] = Config.APP_BASE + path.slice(slice_after, path.length).join(sep) + `?${Date.now()}`;
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
