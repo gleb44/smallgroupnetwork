@@ -12,7 +12,7 @@ export = clean([
     join(Config.PROJECT_ROOT, Config.DEV_DEST, 'fonts'),
     join(Config.PROJECT_ROOT, Config.DEV_DEST, 'js'),
 
-    join(Config.PROJECT_ROOT, Config.APP_DEST, 'WEB-INF', 'views', 'index.ftl'),
+    join(Config.PROJECT_ROOT, Config.INDEX_DEST, 'index.ftl'),
     join(Config.PROJECT_ROOT, Config.DEV_DEST, 'tsconfig.json'),
 
     join(Config.PROJECT_ROOT, Config.TMP_DIR)

@@ -119,12 +119,6 @@ export class ProjectConfig {
   NG_FACTORY_FILE = 'main-prod';
 
   BOOTSTRAP_FACTORY_PROD_MODULE = `${this.BOOTSTRAP_DIR}/${this.NG_FACTORY_FILE}`;
-  /**
-   * The default title of the application as used in the `<title>` tag of the
-   * `index.html`.
-   * @type {string}
-   */
-  APP_TITLE = 'Small Group Network';
 
   /**
    * The base folder of the applications source files.
@@ -197,6 +191,12 @@ export class ProjectConfig {
    */
   JS_DEST = `${this.APP_DEST}/js`;
 
+  /**
+   * The folder for the built index.ftl file.
+   * @type {string}
+   */
+  INDEX_DEST = `${this.APP_DEST}/WEB-INF/views`;
+  
   /**
    * The version of the application as defined in the `package.json`.
    */

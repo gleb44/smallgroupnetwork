@@ -17,7 +17,7 @@ export = () => {
     .pipe(injectJs())
     .pipe(injectCss())
     .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(join(Config.APP_DEST, 'WEB-INF', 'views')));
+    .pipe(gulp.dest(Config.INDEX_DEST));
 };
 
 /**
