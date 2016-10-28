@@ -5,8 +5,8 @@
 <head>
     <base href="${baseUrl}">
 
-    <link rel="shortcut icon" href="<@spring.url "/assets/img/faviconfi.png"/>" type="image/x-icon"/>
-    <title>FaithInquest</title>
+    <link rel="shortcut icon" href="<@spring.url "/assets/img/faviconsn.png"/>" type="image/x-icon"/>
+    <title>Small Group Network</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
