@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   constructor(public nameListService: NameListService, public accountService:AccountService) {}
 
   signInUser() {
+    debugger;
     let admin = new Admin();
     admin.password = this.password;
     this.accountService.login(admin).subscribe(response => {

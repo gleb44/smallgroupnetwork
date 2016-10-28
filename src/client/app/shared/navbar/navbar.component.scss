@@ -3,19 +3,38 @@
   border-style: solid;
   border-width: 0 0 1px;
   display: block;
-  height: 48px;
-  padding: 0 16px;
+  height: 80px;
+  padding: 15px 0;
+  background: #303030;
 }
 
-nav a {
-  color: #8f8f8f;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 48px;
-  margin-right: 20px;
-  text-decoration: none;
-  vertical-align: middle;
-  cursor: pointer;
+nav {
+  width: 70%;
+  margin: auto;
+
+  a {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    //line-height: 48px;
+    padding-right: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-left: 15px;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    border-right: 1px solid #fff;
+    height: 49px;
+
+    &.router-link-active {
+      color: #dfdfdf !important;
+    }
+
+    &.last {
+      border-right: 0;
+    }
+  }
 }
 
 nav a.router-link-active {
