@@ -23,8 +23,7 @@
       "core-js",
       "express",
       "node",
-      "systemjs",
-      "hammerjs"
+      "systemjs"
     ]
   },
   "exclude": [

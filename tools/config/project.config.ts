@@ -340,7 +340,6 @@ export class ProjectConfig {
       '@angular/platform-browser-dynamic': 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
       '@angular/router': 'node_modules/@angular/router/bundles/router.umd.js',
 
-      '@angular/material': 'node_modules/@angular/material/material.umd.js',
       'primeng': 'node_modules/primeng/primeng.js',
 
       // '@angular/common/testing': 'node_modules/@angular/common/bundles/common-testing.umd.js',
@@ -422,10 +421,6 @@ export class ProjectConfig {
         defaultExtension: 'js'
       },
       '@angular/router': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/material': {
         main: 'index.js',
         defaultExtension: 'js'
       },

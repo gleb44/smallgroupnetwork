@@ -14,8 +14,6 @@ import {AccountService, Admin} from '../shared/index';
 })
 
 export class HomeComponent implements OnInit {
-  isDarkTheme: boolean = false;
-
   newName: string = '';
   password: string = '';
   errorMessage: string;
