@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NameListService } from '../shared/index';
 
-import {Admin} from '../shared/model/admin';
-import {AccountService} from '../shared/service/account.service';
+import {AccountService, Admin} from '../shared/index';
 
 /**
  * This class represents the lazy loaded HomeComponent.

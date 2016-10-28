@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { ToolbarComponent } from './toolbar/index';
 import { NavbarComponent } from './navbar/index';
 import { NameListService } from './name-list/index';
 import { FooterComponent } from './footer/index';
+
+import { AccountService } from './service/index';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -14,15 +15,14 @@ import { FooterComponent } from './footer/index';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [ToolbarComponent, NavbarComponent, FooterComponent],
-  exports: [ToolbarComponent, NavbarComponent, FooterComponent,
-    CommonModule, FormsModule, RouterModule]
+  declarations: [NavbarComponent, FooterComponent],
+  exports: [NavbarComponent, FooterComponent, CommonModule, FormsModule, RouterModule]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: SharedModule,
-      providers: [NameListService]
+      ngModule: <any>SharedModule,
+      providers: [<any>NameListService, <any>AccountService]
     };
   }
 }

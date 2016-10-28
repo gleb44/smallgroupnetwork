@@ -3,5 +3,6 @@
  */
 export * from './name-list/index';
 export * from './navbar/index';
-export * from './toolbar/index';
+export * from './model/index';
+export * from './service/index';
 export * from './config/env.config';
