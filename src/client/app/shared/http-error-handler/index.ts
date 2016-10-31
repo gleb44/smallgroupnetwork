@@ -1,4 +1,4 @@
 /**
  * This barrel file provides the export for the shared NavbarComponent.
  */
-export * from './httpErrorHandlerService';
+export * from './http-error-handler.service';

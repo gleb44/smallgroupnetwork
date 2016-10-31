@@ -5,8 +5,8 @@ import {HttpLoaderEventEmitter} from '../notification/notification';
 @Component({
    moduleId: module.id,
    selector: 'sd-http-loader',
-   templateUrl: 'http.loader.component.html',
-   styleUrls: ['http.loader.component.css'],
+   templateUrl: 'http-loader.component.html',
+   styleUrls: ['http-loader.component.css'],
 })
 
 export class HttpLoaderComponent implements OnInit {

@@ -1,4 +1,4 @@
-import {BaseModel} from "./baseModel";
+import {BaseModel} from "./base-model";
 
 export class Admin extends BaseModel<string>
 {

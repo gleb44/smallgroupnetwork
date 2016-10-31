@@ -8,10 +8,9 @@ import { NameListService } from './name-list/index';
 import { FooterComponent } from './footer/index';
 
 import {NOTIFICATION_PROVIDERS} from "./notification/notification";
-import { AccountService } from './service/index';
+import { AccountService } from './rest-services/index';
 import { HttpErrorHandlerService } from "./http-error-handler/index";
-import { HttpLoaderService } from "./http-loader/index";
-import { HttpLoaderComponent } from "./http-loader/index";
+import { HttpLoaderService, HttpLoaderComponent } from "./http-loader/index";
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
