@@ -64,6 +64,7 @@ gulp.task('build.prod.exp', (done: any) =>
               'clean.app',
               'tslint',
               'build.assets.prod',
+              'build.fonts',
               'build.html_css',
               'copy.prod',
               'compile.ahead.prod',

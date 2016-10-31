@@ -11,7 +11,7 @@ import Config from '../../config';
 function codegen(
     ngOptions: tsc.AngularCompilerOptions, cliOptions: tsc.NgcCliOptions, program: ts.Program,
     host: ts.CompilerHost) {
-  return CodeGenerator.create(ngOptions, cliOptions, program, host).codegen();
+  return CodeGenerator.create(ngOptions, cliOptions, program, host).codegen({transitiveModules: true});
 }
 
 const modifyFile = (path: string, mod: any = (f: string) => f) => {
@@ -38,11 +38,10 @@ export = (done: any) => {
 
   const cliOptions = new tsc.NgcCliOptions(args);
   tsc.main(Config.TMP_DIR, cliOptions, codegen)
-    .then(done)
-    .catch(e => {
-      console.error(e.stack);
-      console.error('Compilation failed');
-      process.exit(1);
-    });
+      .then(done)
+      .catch(e => {
+        console.error(e.stack);
+        console.error('Compilation failed');
+        process.exit(1);
+      });
 };
-

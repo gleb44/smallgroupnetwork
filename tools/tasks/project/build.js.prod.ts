@@ -9,6 +9,7 @@ const plugins = <any>gulpLoadPlugins();
 
 const INLINE_OPTIONS = {
   base: Config.TMP_DIR,
+  target: 'es5',
   useRelativePaths: true,
   removeLineBreaks: true
 };
@@ -25,18 +26,18 @@ export = () => {
     '!' + join(Config.TMP_DIR, `**/${Config.NG_FACTORY_FILE}.ts`)
   ];
   let result = gulp.src(src)
-    .pipe(plugins.plumber())
-    .pipe(plugins.inlineNg2Template(INLINE_OPTIONS))
-    .pipe(tsProject())
-    .once('error', function(e: any) {
-      this.once('finish', () => process.exit(1));
-    });
+      .pipe(plugins.plumber())
+      .pipe(plugins.inlineNg2Template(INLINE_OPTIONS))
+      .pipe(tsProject())
+      .once('error', function(e: any) {
+        this.once('finish', () => process.exit(1));
+      });
 
 
   return result.js
-    .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(Config.TMP_DIR))
-    .on('error', (e: any) => {
-      console.log(e);
-    });
+      .pipe(plugins.template(templateLocals()))
+      .pipe(gulp.dest(Config.TMP_DIR))
+      .on('error', (e: any) => {
+        console.log(e);
+      });
 };
