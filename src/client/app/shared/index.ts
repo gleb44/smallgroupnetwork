@@ -4,6 +4,7 @@
 export * from './name-list/index';
 export * from './navbar/index';
 export * from './model/index';
+export * from './message/index';
 export * from './rest-services/index';
 export * from './http-loader/index';
 export * from './http-error-handler/index';

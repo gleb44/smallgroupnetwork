@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { MessageComponent } from './message/index';
 import { NavbarComponent } from './navbar/index';
 import { NameListService } from './name-list/index';
 import { FooterComponent } from './footer/index';
@@ -18,8 +19,8 @@ import { HttpLoaderService, HttpLoaderComponent } from "./http-loader/index";
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [NavbarComponent, FooterComponent, HttpLoaderComponent],
-  exports: [NavbarComponent, FooterComponent, HttpLoaderComponent, CommonModule, FormsModule, RouterModule]
+  declarations: [NavbarComponent, FooterComponent, HttpLoaderComponent, MessageComponent],
+  exports: [NavbarComponent, FooterComponent, HttpLoaderComponent, MessageComponent, CommonModule, FormsModule, RouterModule]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
