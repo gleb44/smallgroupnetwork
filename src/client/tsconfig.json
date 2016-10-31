@@ -22,7 +22,8 @@
       "core-js",
       "express",
       "node",
-      "systemjs"
+      "systemjs",
+      "jquery"
     ]
   },
   "exclude": [

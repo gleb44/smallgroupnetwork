@@ -3,15 +3,10 @@ import {Admin} from '../model/admin';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
-import {
-    GET, PUT, POST,
-    DELETE, BaseUrl, Headers, Header,
-    Produces, MediaType, DefaultHeaders,
-    Path, Body, Query
-} from './rest-client';
+import { GET, PUT, POST, DELETE, BaseUrl, Headers, Header, Produces, MediaType, DefaultHeaders, Path, Body, Query } from './rest-client';
 import {BaseService} from './base.service';
-// import {HttpLoaderService} from '../http-loader/httpLoaderService';
-// import {HttpErrorHandlerService} from '../http-error-handler/httpErrorHandlerService';
+import {HttpLoaderService} from '../http-loader/index';
+import {HttpErrorHandlerService} from '../http-error-handler/index';
 
 @Injectable()
 @BaseUrl('/api/admin/account/')
@@ -23,8 +18,10 @@ export class AccountService extends BaseService {
 
     token:Admin = null;
 
-    constructor(protected http:Http) {
-        super(http);
+    constructor(protected http:Http,
+                protected httpLoaderService:HttpLoaderService,
+                protected httpErrorHandlerService:HttpErrorHandlerService) {
+        super(http, httpLoaderService, httpErrorHandlerService);
     }
 
     @GET('info')
