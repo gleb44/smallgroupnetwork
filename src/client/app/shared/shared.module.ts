@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 
 import { MessageComponent } from './message/index';
 import { NavbarComponent } from './navbar/index';
-import { NameListService } from './name-list/index';
 import { FooterComponent } from './footer/index';
 
 import {NOTIFICATION_PROVIDERS} from "./notification/notification";
@@ -18,9 +17,25 @@ import { HttpLoaderService, HttpLoaderComponent } from "./http-loader/index";
  */
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
-  declarations: [NavbarComponent, FooterComponent, HttpLoaderComponent, MessageComponent],
-  exports: [NavbarComponent, FooterComponent, HttpLoaderComponent, MessageComponent, CommonModule, FormsModule, RouterModule]
+  imports: [
+    CommonModule,
+    RouterModule
+  ],
+  declarations: [
+    NavbarComponent,
+    FooterComponent, 
+    HttpLoaderComponent, 
+    MessageComponent
+  ],
+  exports: [
+    NavbarComponent, 
+    FooterComponent, 
+    HttpLoaderComponent, 
+    MessageComponent, 
+    CommonModule, 
+    FormsModule, 
+    RouterModule
+  ]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
@@ -28,7 +43,6 @@ export class SharedModule {
       ngModule: <any>SharedModule,
       providers: [
         NOTIFICATION_PROVIDERS,
-        <any>NameListService,
         <any>HttpErrorHandlerService,
         <any>HttpLoaderService,
         <any>AccountService

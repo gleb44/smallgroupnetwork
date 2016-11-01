@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { NameListService } from '../shared/index';
+import { Component } from '@angular/core';
 
 import {AccountService, Admin} from '../shared/index';
 
@@ -13,19 +12,11 @@ import {AccountService, Admin} from '../shared/index';
   styleUrls: ['home.component.css'],
 })
 
-export class HomeComponent implements OnInit {
-  newName: string = '';
+export class HomeComponent {
   password: string = '';
-  errorMessage: string;
-  names: any[] = [];
 
-  /**
-   * Creates an instance of the HomeComponent with the injected
-   * NameListService.
-   *
-   * @param {NameListService} nameListService - The injected NameListService.
-   */
-  constructor(public nameListService: NameListService, public accountService:AccountService) {}
+  constructor(public accountService:AccountService) {
+  }
 
   signInUser() {
     let admin = new Admin();
@@ -34,34 +25,4 @@ export class HomeComponent implements OnInit {
       console.log((<Admin>response).id);
     });
   }
-
-  /**
-   * Get the names OnInit
-   */
-  ngOnInit() {
-    this.getNames();
-  }
-
-  /**
-   * Handle the nameListService observable
-   */
-  getNames() {
-    this.nameListService.get()
-      .subscribe(
-        names => this.names = names,
-        error =>  this.errorMessage = <any>error
-      );
-  }
-
-  /**
-   * Pushes a new name onto the names array
-   * @return {boolean} false to prevent default form submit behavior to refresh the page.
-   */
-  addName(): boolean {
-    // TODO: implement nameListService.post
-    this.names.push(this.newName);
-    this.newName = '';
-    return false;
-  }
-
 }

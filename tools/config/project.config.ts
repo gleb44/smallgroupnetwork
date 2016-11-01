@@ -349,6 +349,7 @@ export class ProjectConfig {
       '@angular/router': 'node_modules/@angular/router/bundles/router.umd.js',
 
       'primeng': 'node_modules/primeng/primeng.js',
+      'angular2-google-maps/core': 'node_modules/angular2-google-maps/core/core.umd.js',
 
       // '@angular/common/testing': 'node_modules/@angular/common/bundles/common-testing.umd.js',
       // '@angular/compiler/testing': 'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
@@ -438,6 +439,10 @@ export class ProjectConfig {
       },
       'primeng': { 
         defaultExtension: 'js' 
+      },
+      'angular2-google-maps/core': {
+        main: 'index.js',
+        defaultExtension: 'js'
       }
     }
   };
