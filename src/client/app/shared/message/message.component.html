@@ -1,3 +1,58 @@
-<div class="messages-cont" [hidden]="messages.length == 0">
-    Message
+<div class="messages-cont" [hidden]="messages.length === 0">
+
+    <div class="ui-growl ui-widget" *ngFor="let message of messages" style="z-index: 1072; opacity: 1.016;">
+        <div aria-live="polite" class="ui-growl-item-container ui-state-highlight ui-corner-all ui-shadow ui-growl-message-error">
+
+            <div class="ui-growl-item">
+                <div class="ui-growl-icon-close fa fa-close" (click)="closeAlertMessage($index)"></div>
+                <span class="ui-growl-image fa fa-2x ui-growl-image-info fa-close"></span>
+                <div class="ui-growl-message" *ngFor="let item of message.items">
+                    <span class="ui-growl-title" [textContent]="message.type"></span>
+                    <p [textContent]="item.msg"></p>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--<div class="modal fade in" *ngFor="let message of messages" style="display: block;">-->
+        <!--<div class="modal-dialog modal-md">-->
+            <!--<div class="modal-content">-->
+
+                <!--<div class="panel panel-modal alert-{{message.type}}">-->
+                    <!--<div class="panel-body" style="overflow: hidden;">-->
+                        <!--<div class="panel-content-error">-->
+
+                            <!--<div class="row control">-->
+                                <!--<div class="col">-->
+                                    <!--<i (click)="closeAlertMessage($index)" class="icon-close pull-right cursor"></i>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                            <!--<div class="row content">-->
+                                <!--<div class="col" *ngFor="let item of message.items">-->
+                                    <!--<div class="accordion error-stack">-->
+                                        <!--<h4 (click)="showTrace($parent.$index, $index)">-->
+                                            <!--<span [textContent]="item.msg"></span>-->
+                                        <!--</h4>-->
+
+                                        <!--<div class="accordion-content-outer margin-top-10" *ngIf="item.trace" [hidden]="!item.traceOpen">-->
+                                            <!--<div class="accordion-content">-->
+                                                <!--<div class="margin-bottom-20" [textContent]="item.name"></div>-->
+                                                <!--<div *ngFor="let traceItem of item.trace" [textContent]="traceItem"></div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
 </div>
