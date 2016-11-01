@@ -22,7 +22,11 @@ export class HomeComponent {
     let admin = new Admin();
     admin.password = this.password;
     this.accountService.login(admin).subscribe(response => {
-      console.log((<Admin>response).id);
+      this.afterSignIn(<Admin>response);
     });
+  }
+
+  afterSignIn(user: Admin) {
+    console.log(user.id);
   }
 }

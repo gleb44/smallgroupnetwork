@@ -1,0 +1,16 @@
+<div class="fluid-container login">
+    <form (submit)="signInUser()" class="new_home_page" novalidate="novalidate">
+        <input type="hidden" class="jsPlug" value="frm_user_register">
+        <input type="hidden" name="ci_csrf_token" value="">
+        <div class="form-group">
+            <input type="text" [(ngModel)]="email" name="email" id="email" placeholder="Email address" value="" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="password" [(ngModel)]="password" name="password" id="password" placeholder="Password" class="form-control grey_bg">
+        </div>
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-default register_btn">Register</button>
+        </div>
+        <p>Already have an account? <a [routerLink]="['/']" class="new_home_login">Login</a></p>
+    </form>
+</div>

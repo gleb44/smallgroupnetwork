@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import {InputTextModule} from 'primeng/primeng';
+import { InputTextModule } from 'primeng/primeng';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 
 import { GoogleMapsComponent } from './google-maps/index';

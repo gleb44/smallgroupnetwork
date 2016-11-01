@@ -34,7 +34,9 @@ export class HttpErrorHandlerService implements IHttpErrorHandlerService {
     }
 
     private process401(err:any):Observable<any> {
-        // this.router.navigate([loginPath]);
+        // TODO
+        this.router.navigate(['login']);
+        // TODO OR
         this.errorMessagesEventEmitter.emit(['Unauthorized!']);
 
         return Observable.empty();

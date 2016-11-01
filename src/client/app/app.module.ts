@@ -7,18 +7,25 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
-import { AboutModule } from './about/about.module';
 import { HomeModule } from './home/home.module';
+import { AboutModule } from './about/about.module';
+import { LoginModule } from "./login/login.module";
+import { AdminModule } from "./admin/admin.module";
 import { SharedModule } from './shared/shared.module';
+import { AdminDashboardModule } from "./admin-dashboard/admin-dashboard.module";
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(routes),
-    AboutModule,
+    SharedModule.forRoot(),
+
     HomeModule,
-    SharedModule.forRoot()
+    AboutModule,
+    LoginModule,
+    AdminModule,
+    AdminDashboardModule
   ],
   declarations: [AppComponent],
   providers: [{

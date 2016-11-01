@@ -11,6 +11,7 @@ import {NOTIFICATION_PROVIDERS} from "./notification/notification";
 import { AccountService } from './rest-services/index';
 import { HttpErrorHandlerService } from "./http-error-handler/index";
 import { HttpLoaderService, HttpLoaderComponent } from "./http-loader/index";
+import { AuthGuardService } from "./auth/index";
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -45,6 +46,9 @@ export class SharedModule {
         NOTIFICATION_PROVIDERS,
         <any>HttpErrorHandlerService,
         <any>HttpLoaderService,
+        <any>AuthGuardService,
+
+        // REST
         <any>AccountService
       ]
     };
