@@ -1,7 +1,5 @@
 <div class="fluid-container login">
     <form (submit)="signInUser()" class="new_home_page" novalidate="novalidate">
-        <input type="hidden" class="jsPlug" value="frm_user_register">
-        <input type="hidden" name="ci_csrf_token" value="">
         <div class="form-group">
             <input type="text" [(ngModel)]="email" name="email" id="email" placeholder="Email address" value="" class="form-control">
         </div>
