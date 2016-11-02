@@ -13,6 +13,7 @@ export =
     run() {
       let paths: string[] = [
         join(Config.APP_SRC, '**'),
+        '!' + Config.SCSS_SRC,
         '!' + join(Config.APP_SRC, '**', '*.ftl'),
         '!' + join(Config.APP_SRC, '**', '*.ts'),
         '!' + join(Config.APP_SRC, '**', '*.scss'),
