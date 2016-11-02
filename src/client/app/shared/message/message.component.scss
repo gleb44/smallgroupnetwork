@@ -1,4 +1,18 @@
 .messages-cont {
+
+  .ui-accordion {
+    .ui-accordion-header.ui-state-default {
+      border: 0;
+      a {
+        color: #ffffff;
+      }
+      span {
+        color: #ffffff;
+      }
+    }
+  }
+
+
   //position: fixed;
   //width: 100%;
   //top: 10px;

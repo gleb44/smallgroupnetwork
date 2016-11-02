@@ -12,7 +12,7 @@ import {ErrorMessagesEventEmitter} from '../notification/notification';
 export class MessageComponent implements OnInit {
 
     messages = [];
-    msgDuration = 5000; // ms
+    msgDuration = null; // ms
 
     constructor(private errorMessagesEventEmitter:ErrorMessagesEventEmitter) {
     }
@@ -63,12 +63,17 @@ export class MessageComponent implements OnInit {
         this.hideMsg(index);
     }
 
-    public showTrace(index:number, itemIndex:number) {
-        this.removeTimer(index);
-        var msg = this.messages[index];
-        if (msg) {
-            msg.items[itemIndex].traceOpen = !msg.items[itemIndex].traceOpen;
-        }
+    public showTrace(message:any) {
+        //this.removeTimer(index);
+        message.traceOpen = !message.traceOpen;
     }
+
+    // public showTrace(index:number, itemIndex:number) {
+    //     this.removeTimer(index);
+    //     var msg = this.messages[index];
+    //     if (msg) {
+    //         msg.items[itemIndex].traceOpen = !msg.items[itemIndex].traceOpen;
+    //     }
+    // }
 
 }
