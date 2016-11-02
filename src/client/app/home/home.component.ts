@@ -14,6 +14,14 @@ import {AccountService, Admin} from '../shared/index';
 
 export class HomeComponent {
   password: string = '';
+  errorMessage: string;
+  names: any[] = [];
+  items: any[] = [
+    {text:"1It's easy to feel isolated in small group ministry. It's easy to get bogged down with the issues you're facing, the problems you're tackling, and the hurdles you just can't seem to clear. That's why I love the Small Group Network. It's a group of folks who are working in the trenches of group life, getting together for encouragement, sharing resources, and building relationships. The Small Group Network is an answer to a lot of the problems that small group pastors face.", author: "John C. Maxwell Author, Speaker and Founder - INJOY Stewardship Services and EQUIP"},
+    {text:"2It's easy to feel isolated in small group ministry. It's easy to get bogged down with the issues you're facing, the problems you're tackling, and the hurdles you just can't seem to clear. That's why I love the Small Group Network. It's a group of folks who are working in the trenches of group life, getting together for encouragement, sharing resources, and building relationships. The Small Group Network is an answer to a lot of the problems that small group pastors face.", author: "John C. Maxwell Author, Speaker and Founder - INJOY Stewardship Services and EQUIP"},
+    {text:"3It's easy to feel isolated in small group ministry. It's easy to get bogged down with the issues you're facing, the problems you're tackling, and the hurdles you just can't seem to clear. That's why I love the Small Group Network. It's a group of folks who are working in the trenches of group life, getting together for encouragement, sharing resources, and building relationships. The Small Group Network is an answer to a lot of the problems that small group pastors face.", author: "John C. Maxwell Author, Speaker and Founder - INJOY Stewardship Services and EQUIP"},
+    {text:"4It's easy to feel isolated in small group ministry. It's easy to get bogged down with the issues you're facing, the problems you're tackling, and the hurdles you just can't seem to clear. That's why I love the Small Group Network. It's a group of folks who are working in the trenches of group life, getting together for encouragement, sharing resources, and building relationships. The Small Group Network is an answer to a lot of the problems that small group pastors face.", author: "John C. Maxwell Author, Speaker and Founder - INJOY Stewardship Services and EQUIP"},
+  ];
 
   constructor(public accountService:AccountService) {
   }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { InputTextModule } from 'primeng/primeng';
+import {InputTextModule, PasswordModule, ButtonModule} from 'primeng/primeng';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 
 import { GoogleMapsComponent } from './google-maps/index';
@@ -14,6 +14,8 @@ import { AccountService } from '../shared/index';
     CommonModule, 
     SharedModule, 
     InputTextModule,
+    PasswordModule,
+    ButtonModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA93LGzhjbOIDkL-A7cLEPXnBBQD-TiPOk'
     })

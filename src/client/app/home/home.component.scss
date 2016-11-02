@@ -1,49 +1,62 @@
-.fluid-container {
-  
-  &.home {
+.home {
+  .home-top {
     width: 100%;
     background-image: url("./assets/img/newhomepage.png");
     background-size: 100% 100%;
-  }
-  
-  .home-content {
-    width: 70%;
-    margin: 0 auto;
-
-    .adv-block {
-      width: 40%;
-      font-size: 26px;
-      font-weight: bold;
-      background-color: #27a9ce;
-      margin: 20px 0;
-      color: white;
-      padding: 3px 0px 0px 10px;
-    }
-
-    .login-block {
-      width: 40%;
-      margin: 10px 0 5px;
-
-      .login-container {
-        background-color: rgba(255,255,255,0.5);
-        margin: 10px 0;
-        -webkit-box-shadow: 0px 3px 3px 0px rgba(102,102,102,1);
-        -moz-box-shadow: 0px 3px 3px 0px rgba(102,102,102,1);
-        box-shadow: 0px 3px 3px 0px rgba(102,102,102,1);
-
-        .login-form {
-          padding: 60px 20px 10px 20px;
-
-          p {
-            font-size: 14px;
-          }
-
+    .home-top-content {
+      .adv-block {
+        height: 100%;
+        padding-top: 15%;
+        .banner {
+          width: 90%;
+          font-size: 26px;
+          font-weight: bold;
+          background-color: #27a9ce;
+          margin: 20px 5px;
+          color: white;
+          padding: 3px 0px 0px 10px;
         }
-
-
       }
 
-    }
+      .login-block {
+        margin: 10px 0 5px;
+        .login-container {
+          background-color: rgba(255,255,255,0.5);
+          margin: 10px 0;
+          -webkit-box-shadow: 0px 3px 3px 0px rgba(102,102,102,1);
+          -moz-box-shadow: 0px 3px 3px 0px rgba(102,102,102,1);
+          box-shadow: 0px 3px 3px 0px rgba(102,102,102,1);
 
+          .login-form {
+            padding: 60px 20px 10px 20px;
+
+            .ui-inputtext {
+              width: 100%;
+              margin-bottom: 10px;
+            }
+
+            p {
+              font-size: 14px;
+            }
+
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 40em) {
+
+  .home {
+    .home-top {
+      .home-top-content {
+        .adv-block {
+          .banner {
+            width: 100%;
+          }
+        }
+      }
+    }
   }
 }

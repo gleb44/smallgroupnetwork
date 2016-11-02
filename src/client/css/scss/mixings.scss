@@ -1,0 +1,14 @@
+/* flex wrappping */
+@mixin flex-content($wrap: wrap, $direction: row, $vertical: center, $horizontal: center) {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: $direction $wrap;
+  -webkit-flex-flow: $direction $wrap;
+  align-items: $vertical;
+  -webkit-align-items: $vertical;
+  justify-content: $horizontal;
+  -webkit-justify-content: $horizontal;
+}

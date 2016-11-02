@@ -1,9 +1,17 @@
-<nav class="flex flex-align-horizontal-stretch flex-align-vertical-center">
-  <div>
-    <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"><img src="./assets/img/logo.png"></a>
+<div class="sn-wrapper">
+  <div class="sn-container">
+    <div class="sn-content">
+
+      <nav class="ui-g flex-align-horizontal-stretch flex-align-vertical-center">
+        <div class="ui-g-5 ui-lg-5 ui-sm-12 ui-md-7">
+          <a class="logo-item" [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"><img src="./assets/img/logo.png"></a>
+        </div>
+        <div class="menu-container ui-g-7 ui-lg-7 ui-sm-12 ui-md-5">
+          <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">HOME</a>
+          <a class="last" [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">ABOUT</a>
+        </div>
+      </nav>
+
+    </div>
   </div>
-  <div>
-    <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">HOME</a>
-    <a class="last" [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">ABOUT</a>
-  </div>
-</nav>
+</div>

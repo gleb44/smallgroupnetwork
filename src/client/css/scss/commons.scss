@@ -1,3 +1,4 @@
+
 @font-face {
   font-family: 'proxima_n_w15_boldregular';
   src: url('../../fonts/proxima/proxima-nova-bold-greek.eot');
@@ -74,19 +75,81 @@ input {
 }
 
 button {
-  background-color: #106cc8;
-  border-style: none;
-  color: rgba(255, 255, 255, 0.87);
-  cursor: pointer;
-  display: inline-block;
-  font-size: 14px;
-  height: 40px;
-  padding: 8px 18px;
-  text-decoration: none;
+  &.default-button {
+
+    .ui-button-text {
+      border: none;
+      background: #303030;
+      border-bottom: 4px solid #acacac;
+      color: #eeeeee;
+      width: 155px;
+      height: 40px;
+      font-size: 16px;
+      line-height: 18px;
+
+      &:hover {
+        border-bottom: 4px solid #303030;
+      }
+
+    }
+
+  }
+
+  &.register-button {
+    .ui-button-text {
+      background-color: #e07219;
+      border-radius: 0px;
+      color: white;
+      border: transparent;
+      padding: 9px;
+      font-size: 16px;
+      width: 155px;
+      height: 40px;
+
+      &:hover {
+        background-color: #e0a50f;
+      }
+
+    }
+  }
+
 }
 
-button:hover {
-  background-color: #28739e;
+.sn-wrapper {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+
+  .sn-container {
+    width: 100%;
+
+    .sn-content {
+      margin: 0 auto;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .sn-content {
+    width: 1020px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sn-content {
+    width: 1170px;
+  }
+}
+
+@media (min-width: 992px) {
+  .sn-content {
+    width: 970px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
 }
 
 #application-version {
