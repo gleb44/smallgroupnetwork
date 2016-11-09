@@ -37,7 +37,7 @@ export class HttpErrorHandlerService implements IHttpErrorHandlerService {
         // TODO
         this.router.navigate(['login']);
         // TODO OR
-        this.errorMessagesEventEmitter.emit(['Unauthorized!']);
+        // this.errorMessagesEventEmitter.emit(['Unauthorized!']);
 
         return Observable.empty();
     }

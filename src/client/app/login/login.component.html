@@ -1,14 +1,26 @@
-<div class="fluid-container login">
-    <form (submit)="signInUser()" class="new_home_page" novalidate="novalidate">
-        <div class="form-group">
-            <input type="text" [(ngModel)]="email" name="email" id="email" placeholder="Email address" value="" class="form-control">
+<div class="sn-wrapper login">
+    <div class="sn-container login-top">
+        <div class="sn-content login-top-content ui-g">
+            <div class="login-block ui-md-5 ui-sm-12 ui-xs-12">
+                <div class="login-container">
+                    <div class="login-form">
+                        <h4>
+                            <b>REGISTER FOR SGN</b>
+                        </h4>
+                        <p>Register now for the Small Group Network and receive a free resource that can help train your volunteer army to be better leaders and resources to your small group community.</p>
+
+                        <form (submit)="signInUser()" #userForm="ngForm" class="new_login_page" novalidate="novalidate">
+                            <input type="text" pInputText [(ngModel)]="model.email" name="email" id="email" #email="ngModel" placeholder="Email address" value="" class="">
+                            <input type="password" pPassword="" [(ngModel)]="model.password" name="password" id="password" #password="ngModel" placeholder="Password" class="" required>
+                            <button pButton type="submit" class="register-button" label="Register" [disabled]="!userForm.form.valid"></button>
+                            <p>Already have an account? <a [routerLink]="['/']" class="new_login_login">Login</a></p>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="form-group">
-            <input type="password" [(ngModel)]="password" name="password" id="password" placeholder="Password" class="form-control grey_bg">
-        </div>
-        <div class="form-group text-center">
-            <button type="submit" class="btn btn-default register_btn">Register</button>
-        </div>
-        <p>Already have an account? <a [routerLink]="['/']" class="new_home_login">Login</a></p>
-    </form>
+    </div>
 </div>
+

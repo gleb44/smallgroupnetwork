@@ -15,18 +15,14 @@ import {adminPath} from "../admin/admin.routes";
 })
 
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
+
+  model = new Admin();
 
   constructor(public router:Router, public accountService:AccountService) {
   }
 
   signInUser() {
-    let admin = new Admin();
-    admin.email = this.email;
-    admin.password = this.password;
-
-    this.accountService.login(admin).subscribe(response => {
+    this.accountService.login(this.model).subscribe(response => {
       this.afterSignIn(<Admin>response);
     });
   }
