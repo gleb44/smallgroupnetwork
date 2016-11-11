@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.smallgroupnetwork</groupId>
+    <artifactId>db</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>DB Init component</name>
+
+    <properties>
+        <profiles_dir>../profiles</profiles_dir>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-2</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${properties_path}</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>9.4-1201-jdbc41</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <driver>${ui.db.driver}</driver>
+                    <url>jdbc:${ui.db.server}://${ui.db.serverName}:${ui.db.port}/${ui.db.urlPath}</url>
+                    <username>${ui.db.username}</username>
+                    <password>${ui.db.password}</password>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>${basedir}/db-schema-create.sql</srcFile>
+                                <srcFile>${basedir}/init.sql</srcFile>
+                            </srcFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>dev</value>
+                </property>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <properties_path>${profiles_dir}/dev.properties</properties_path>
+            </properties>
+        </profile>
+        <profile>
+            <id>stage</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>stage</value>
+                </property>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <properties_path>${profiles_dir}/stage.properties</properties_path>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>prod</value>
+                </property>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <properties_path>${profiles_dir}/prod.properties</properties_path>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>

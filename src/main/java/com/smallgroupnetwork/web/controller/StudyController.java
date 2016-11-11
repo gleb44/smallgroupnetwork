@@ -3,7 +3,6 @@ package com.smallgroupnetwork.web.controller;
 import com.smallgroupnetwork.model.Study;
 import com.smallgroupnetwork.model.dto.StudySearch;
 import com.smallgroupnetwork.persistence.Paging;
-import com.smallgroupnetwork.service.ISearchRequestService;
 import com.smallgroupnetwork.service.IStudyService;
 import com.smallgroupnetwork.service.conversion.FormatType;
 import com.smallgroupnetwork.service.conversion.IConversionService;
@@ -40,8 +39,6 @@ public class StudyController
 {
 	@Autowired
 	private IStudyService studyService;
-	@Autowired
-	private ISearchRequestService searchRequestService;
 	@Autowired
 	private IConversionService conversionService;
 	@Autowired
@@ -114,22 +111,11 @@ public class StudyController
 	{
 		Assert.notNull( paging );
 		List<Study> studies = studyService.findByFullText( search, paging );
-
-		if( !studies.isEmpty()  && (paging.getOffset() == null || paging.getOffset() == 0) )
-		{
-			String searchId = search.getPattern().toLowerCase().trim();
-			if( searchId.length() > 0 )
-			{
-				searchRequestService.increment( searchId );
-			}
-		}
-
-		if( studies.isEmpty())
+		if( studies.isEmpty() )
 		{
 			//use pattern occurence search if nothing found by fulltext
 			studies = studyService.findByPattern( search, paging );
 		}
-
 		return new GridResult<>( studies );
 	}
 

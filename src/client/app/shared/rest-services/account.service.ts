@@ -30,13 +30,13 @@ export class AccountService extends BaseService {
         return null;
     }
 
-    @POST('sign-in')
+    @POST('login')
     @Produces(MediaType.JSON)
     private signIn(@Body admin:Admin):Observable<any> {
         return null;
     }
 
-    @GET('sign-out')
+    @GET('logout')
     private signOut():Observable<any> {
         return null;
     }

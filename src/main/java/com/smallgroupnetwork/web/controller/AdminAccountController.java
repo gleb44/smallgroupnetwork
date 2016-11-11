@@ -3,16 +3,17 @@ package com.smallgroupnetwork.web.controller;
 import com.smallgroupnetwork.model.Admin;
 import com.smallgroupnetwork.security.AccountHolder;
 import com.smallgroupnetwork.service.IAdminService;
-import com.smallgroupnetwork.validation.ValidationException;
-import com.smallgroupnetwork.validation.ValidationResult;
 import com.smallgroupnetwork.web.exception.UnauthorizedException;
 import com.smallgroupnetwork.web.util.DefaultMessages;
 import com.smallgroupnetwork.web.util.OkResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,9 +26,6 @@ import javax.servlet.http.HttpSession;
 @RequestMapping( Routes.ADMIN_ACCOUNT )
 public class AdminAccountController
 {
-	@Value( "${admin.password}" )
-	private String adminPassword;
-
 	@Autowired
 	private IAdminService adminService;
 
@@ -36,31 +34,14 @@ public class AdminAccountController
 		return AccountHolder.ADMIN_KEY;
 	}
 
-	@RequestMapping( value = "/sign-in", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
+	@RequestMapping( value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public Admin signIn(@RequestBody(required = true) Admin admin, HttpSession session )
+	public Admin login( @RequestBody( required = true ) Admin user, HttpSession session )
 	{
-		if( !adminPassword.equals( admin.getPassword() ) )
-		{
-			throw new ValidationException( "Password Incorrect", new ValidationResult( "password", "Password incorrect" ) );
-		}
-		admin.setId( 1L );
+		Admin admin = adminService.findAccountAndLogin( user.getEmail(), user.getPassword() );
 		session.setAttribute( getSessionKey(), admin );
 		return admin;
 	}
-
-/*
-	@RequestMapping( value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )
-	@ResponseBody
-	public Admin login( @RequestParam( value = "login", required = true ) String login,
-	                    @RequestParam( value = "password", required = true ) String password,
-	                    HttpSession session, HttpServletRequest request )
-	{
-		Admin admin = adminService.findAccountAndLogin( login, password );
-		session.setAttribute( getSessionKey(), admin );
-		return admin;
-	}
-*/
 
 	@RequestMapping( value = "/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
@@ -74,7 +55,7 @@ public class AdminAccountController
 		return admin;
 	}
 
-	@RequestMapping( value = "/sign-out", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
+	@RequestMapping( value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public OkResponse signOut( HttpSession session )
 	{
@@ -82,18 +63,17 @@ public class AdminAccountController
 		return DefaultMessages.OK_RESPONSE;
 	}
 
-/*
 	@RequestMapping( value = "/change-password", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public Admin changePassword( @RequestParam( value = "login", required = true ) String login,
-	                             @RequestParam( value = "password", required = true ) String password,
-	                             @RequestParam( value = "newPassword", required = true ) String newPassword,
-	                             HttpSession session, HttpServletRequest request )
+		@RequestParam( value = "password", required = true ) String password,
+		@RequestParam( value = "newPassword", required = true ) String newPassword,
+		HttpSession session )
 	{
 		adminService.changePassword( login, password, newPassword );
 		Admin admin = adminService.findAccountAndLogin( login, newPassword );
 		session.setAttribute( getSessionKey(), admin );
 		return admin;
 	}
-*/
+
 }

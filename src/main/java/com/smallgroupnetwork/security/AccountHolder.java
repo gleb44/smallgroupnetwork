@@ -9,8 +9,9 @@ import com.smallgroupnetwork.model.Admin;
  */
 public class AccountHolder
 {
-	public static final String FILES_KEY = "com.smallgroupnetwork.admin.files";
+	public static final String USER_KEY = "com.smallgroupnetwork.user.auth";
 	public static final String ADMIN_KEY = "com.smallgroupnetwork.admin.auth";
+	public static final String FILES_KEY = "com.smallgroupnetwork.admin.files";
 
 	private static ThreadLocal<Admin> adminHolder = new ThreadLocal<>();
 

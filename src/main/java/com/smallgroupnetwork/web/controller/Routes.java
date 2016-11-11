@@ -5,12 +5,13 @@ package com.smallgroupnetwork.web.controller;
  * Date: 5/14/14
  * Time: 5:15 PM
  */
-public class Routes
+class Routes
 {
 	public static final String API = "/api";
 	public static final String ADMIN_API = API + "/admin";
 
 	private static final String ACCOUNT_PATH = "/account";
+	public static final String ACCOUNT = API + ACCOUNT_PATH;
 	public static final String ADMIN_ACCOUNT = ADMIN_API + ACCOUNT_PATH;
 
 	public static final String STUDY_PATH = "/study";
@@ -24,8 +25,4 @@ public class Routes
 	private static final String CAROUSEL_SLIDE_PATH = "/slide";
 	public static final String ADMIN_CAROUSEL_SLIDE = ADMIN_API + CAROUSEL_SLIDE_PATH;
 	public static final String CAROUSEL_SLIDE = API + CAROUSEL_SLIDE_PATH;
-
-	public static final String TRENDING_PATH = "/trending";
-	public static final String TRENDING = API + TRENDING_PATH;
-
 }

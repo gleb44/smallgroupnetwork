@@ -62,9 +62,7 @@
     <util:properties id="gitProperties" location="classpath:git.properties"/>
 
     <util:map id="staticAttributesMap">
-        <entry key="livereloadUrl" value="${livereload.url}"/>
         <entry key="baseUrl" value="${ui.base.url}"/>
-        <entry key="addThisKey" value="${add.this.key}"/>
         <entry key="buildEnv" value="${build.env}"/>
         <entry key="gitProperties" value-ref="gitProperties"/>
     </util:map>

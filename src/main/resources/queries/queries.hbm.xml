@@ -10,12 +10,6 @@
         ]]>
     </query>
 
-    <query name="SearchRequest.increment"><![CDATA[
-        UPDATE SearchRequest s SET s.amount = s.amount + 1, lastSearched = now()
-        WHERE s.id = :id
-        ]]>
-    </query>
-
     <sql-query name="Study.fullTextSearch">
         <![CDATA[
             SELECT id,
