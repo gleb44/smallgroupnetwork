@@ -8,6 +8,13 @@ import { changeFileManager, changed, listen } from './code_change_tools';
 const plugins = <any>gulpLoadPlugins();
 
 /**
+ * Serves the Single Page Application. More specifically, calls the `listen` method, which itself launches BrowserSync.
+ */
+export function serveSPA() {
+  listen();
+}
+
+/**
  * This utility method is used to notify that a file change has happened and subsequently calls the `changed` method,
  * which itself initiates a BrowserSync reload.
  * @param {any} e - The file that has changed.
@@ -23,7 +30,7 @@ export function notifyLiveReload(e:any) {
  */
 export function watch(taskname: string) {
   return function () {
-    listen();
+    serveSPA();
 
     let paths:string[]=[
       join(Config.APP_SRC,'**')
@@ -32,10 +39,17 @@ export function watch(taskname: string) {
     plugins.watch(paths, (e: any) => {
       changeFileManager.addFile(e.path);
 
-      runSequence(taskname, () => {
-        changeFileManager.clear();
-        notifyLiveReload(e);
-      });
+      // Resolves issue in IntelliJ and other IDEs/text editors which
+      // save multiple files at once.
+      // https://github.com/mgechev/angular-seed/issues/1615 for more details.
+      setTimeout(() => {
+
+        runSequence(taskname, () => {
+          changeFileManager.clear();
+          notifyLiveReload(e);
+        });
+
+      }, 100);
     });
   };
 }
