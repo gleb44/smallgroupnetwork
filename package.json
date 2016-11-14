@@ -15,7 +15,9 @@
     "lint": "gulp tslint",
     "postinstall": "gulp check.versions && gulp build.bundle.rxjs && npm prune",
     "reinstall": "npm cache clean && npm install",
-    "tasks.list": "gulp --tasks-simple --color"
+    "tasks.list": "gulp --tasks-simple --color",
+    "compodoc": "node_modules/.bin/compodoc -p src/client/tsconfig.json",
+    "serve.compodoc": "node_modules/.bin/compodoc -s"
   },
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
@@ -43,6 +45,7 @@
     "autoprefixer": "^6.5.1",
     "browser-sync": "^2.17.3",
     "codelyzer": "~1.0.0-beta.2",
+    "compodoc": "0.0.12",
     "connect-history-api-fallback": "^1.3.0",
     "cssnano": "^3.7.7",
     "deep-extend": "^0.4.1",

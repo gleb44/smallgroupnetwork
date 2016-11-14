@@ -1,5 +1,4 @@
 import * as gulp from 'gulp';
-import * as util from 'gulp-util';
 import * as runSequence from 'run-sequence';
 
 import Config from './tools/config';
@@ -77,7 +76,7 @@ gulp.task('build.prod.exp', (done: any) =>
 
 
 // --------------
-// Build dev.
+// Dlean dist.
 gulp.task('clean.application', (done: any) =>
     runSequence('clean.app',
                 done));

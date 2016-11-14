@@ -1,6 +1,4 @@
 import { join } from 'path';
-import * as slash from 'slash';
-import * as util from 'gulp-util';
 import { argv } from 'yargs';
 
 import { BuildType, InjectableDependency } from './project.config.interfaces';
