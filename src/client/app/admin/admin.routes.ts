@@ -2,7 +2,7 @@ import { Route } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
 import { AdminDashboardRoutes } from '../admin-dashboard/index';
-import { AuthGuardService, CanDeactivateGuard } from '../shared/index';
+import { AuthGuardService } from '../shared/index';
 
 
 export const adminPath = 'admin';
@@ -16,7 +16,7 @@ export const AdminRoutes: Route[] = [
     path: adminPath,
     component: <any>AdminComponent,
     canActivate: [AuthGuardService],
-    canDeactivate: [CanDeactivateGuard],
+    canDeactivate: [AuthGuardService],
     children: <any>AdminChildrenRoutes
   }
 ];
