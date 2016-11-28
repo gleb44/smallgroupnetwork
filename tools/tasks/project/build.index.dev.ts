@@ -4,7 +4,7 @@ import { join, sep, normalize } from 'path';
 import * as slash from 'slash';
 
 import Config from '../../config';
-import { templateLocals } from '../../utils';
+import { TemplateLocalsBuilder } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
 
@@ -17,7 +17,7 @@ export = () => {
     .pipe(inject('shims'))
     .pipe(inject('libs'))
     .pipe(inject())
-    .pipe(plugins.template(templateLocals()))
+    .pipe(plugins.template(new TemplateLocalsBuilder().withoutStringifiedEnvConfig().build()))
     .pipe(gulp.dest(Config.INDEX_DEST));
 };
 
@@ -38,8 +38,8 @@ function inject(name?: string) {
  */
 function getInjectablesDependenciesRef(name?: string) {
   return Config.DEPENDENCIES
-    .filter(dep => dep['inject'] && dep['inject'] === (name || true))
-    .map(mapPath);
+      .filter(dep => dep['inject'] && dep['inject'] === (name || true))
+      .map(mapPath);
 }
 
 /**
@@ -65,6 +65,7 @@ function transformPath() {
     if (filepath.startsWith(`/${Config.APP_DEST}`)) {
       filepath = filepath.replace(`/${Config.APP_DEST}`, '');
     }
+
     if (filepath.startsWith('/node_modules')) {
       if(filepath.endsWith('.js')) {
         filepath = filepath.replace('/node_modules', 'js');
@@ -73,6 +74,7 @@ function transformPath() {
         filepath = `css/${path[path.length - 1]}`;
       }
     }
+
     arguments[0] = join(Config.APP_BASE, filepath) + `?${Date.now()}`;
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };
