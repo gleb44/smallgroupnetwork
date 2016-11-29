@@ -1,5 +1,6 @@
 package com.smallgroupnetwork.web.interceptor;
 
+import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,13 +30,13 @@ public class JsonNoCacheInterceptor extends WebContentGenerator implements Handl
 				{
 					HandlerMethod method = (HandlerMethod) handler;
 					RequestMapping methodAnnotation = method.getMethodAnnotation( RequestMapping.class );
-					if( methodAnnotation != null && methodAnnotation.produces() != null && methodAnnotation.produces().length > 0 )
+					if( methodAnnotation != null && methodAnnotation.produces().length > 0 )
 					{
 						for( String contentType : methodAnnotation.produces() )
 						{
 							if( MediaType.APPLICATION_JSON_VALUE.equalsIgnoreCase( contentType ) )
 							{
-								preventCaching( response );
+								applyCacheControl( response, CacheControl.noCache() );
 							}
 						}
 					}

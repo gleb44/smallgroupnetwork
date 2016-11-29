@@ -24,7 +24,6 @@
     <!-- Aspect Methods -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
-    <bean id="pagingParameterAspect" class="com.smallgroupnetwork.web.util.PagingParameterAspect"/>
     <bean id="jacksonObjectMapper" class="com.smallgroupnetwork.web.serialization.HibernateAwareObjectMapper"/>
 
 </beans>
