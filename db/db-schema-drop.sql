@@ -6,14 +6,16 @@
 
     drop table if exists attachment cascade;
 
+    drop table if exists mega_test cascade;
+
     drop table if exists slide cascade;
 
     drop table if exists study cascade;
 
-    drop sequence attachment_seq;
+    drop sequence if exists attachment_seq;
 
-    drop sequence hibernate_sequence;
+    drop sequence if exists hibernate_sequence;
 
-    drop sequence slide_seq;
+    drop sequence if exists slide_seq;
 
-    drop sequence study_seq;
+    drop sequence if exists study_seq;

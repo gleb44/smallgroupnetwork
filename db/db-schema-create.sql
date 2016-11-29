@@ -1,3 +1,7 @@
+create sequence attachment_seq start 1 increment 1;
+create sequence hibernate_sequence start 1 increment 1;
+create sequence slide_seq start 1 increment 1;
+create sequence study_seq start 1 increment 1;
 
     create table admin (
         id int8 not null,
@@ -15,6 +19,11 @@
         duration int8,
         file_name varchar(255),
         uploaded timestamp,
+        primary key (id)
+    );
+
+    create table mega_test (
+        id int8 not null,
         primary key (id)
     );
 
@@ -40,17 +49,9 @@
     );
 
     alter table admin 
-        add constraint uk_admin_email  unique (email);
+        add constraint uk_admin_email unique (email);
 
     alter table slide 
         add constraint fk_carousel_slide_attachment 
         foreign key (id_attachment) 
         references attachment;
-
-    create sequence attachment_seq start 1 increment 1;
-
-    create sequence hibernate_sequence;
-
-    create sequence slide_seq start 1 increment 1;
-
-    create sequence study_seq start 1 increment 1;

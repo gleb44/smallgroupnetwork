@@ -27,9 +27,7 @@ public class CyclicAvoidModule extends SimpleModule
 		context.addBeanSerializerModifier( new BeanSerializerModifier()
 		{
 			@Override
-			public JsonSerializer<?> modifySerializer( SerializationConfig config,
-			                                           BeanDescription beanDesc,
-			                                           JsonSerializer<?> serializer )
+			public JsonSerializer<?> modifySerializer( SerializationConfig config, BeanDescription beanDesc, JsonSerializer<?> serializer )
 			{
 				return new CustomBeanSerializer( serializer );
 			}

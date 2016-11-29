@@ -1,19 +1,17 @@
 package com.smallgroupnetwork.model;
 
-import com.smallgroupnetwork.persistence.SyntheticEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.smallgroupnetwork.persistence.SyntheticEntity;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.File;
 import java.io.InputStream;
 import java.util.Date;
 
 @Entity
-@Table( name = "attachment" )
 @JsonIgnoreProperties( ignoreUnknown = true )
 @JsonTypeInfo( use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class", defaultImpl = Attachment.class )
 public class Attachment extends SyntheticEntity implements Cloneable
