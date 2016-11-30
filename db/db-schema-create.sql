@@ -1,6 +1,5 @@
 create sequence attachment_seq start 1 increment 1;
 create sequence slide_seq start 1 increment 1;
-create sequence study_seq start 1 increment 1;
 create sequence user_seq start 1 increment 1;
 
     create table account (
@@ -45,19 +44,6 @@ create sequence user_seq start 1 increment 1;
         primary key (id)
     );
 
-    create table study (
-        id int8 not null,
-        created timestamp not null,
-        description varchar(5120),
-        link varchar(255) not null,
-        speaker varchar(255),
-        start_min int4 not null,
-        start_sec int4 not null,
-        title varchar(255) not null,
-        views_count int4 not null,
-        primary key (id)
-    );
-
     create table user_account (
         id int8 not null,
         email varchar(255),
@@ -88,8 +74,7 @@ create sequence user_seq start 1 increment 1;
     alter table profile 
         add constraint FKpjg40inv1v6gtxger2143khdk 
         foreign key (id) 
-        references user_account 
-        on delete cascade;
+        references user_account;
 
     alter table slide 
         add constraint fk_carousel_slide_attachment 

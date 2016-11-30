@@ -30,14 +30,10 @@
 
     drop table if exists slide cascade;
 
-    drop table if exists study cascade;
-
     drop table if exists user_account cascade;
 
     drop sequence if exists attachment_seq;
 
     drop sequence if exists slide_seq;
-
-    drop sequence if exists study_seq;
 
     drop sequence if exists user_seq;
