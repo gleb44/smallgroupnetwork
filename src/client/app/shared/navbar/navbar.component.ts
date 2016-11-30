@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import {AccountService} from '../rest-services/index';
 
 /**
  * This class represents the navigation bar component.
@@ -10,4 +13,19 @@ import { Component } from '@angular/core';
   styleUrls: ['navbar.component.css'],
 })
 
-export class NavbarComponent { }
+export class NavbarComponent {
+
+  constructor(private router:Router, private accountService:AccountService) {
+  }
+
+  onLogout() {
+    this.accountService.logout().subscribe(response => {
+      if(this.router.url.indexOf('admin') >= 0) {
+        this.router.navigate(['login']);
+      } else {
+        this.router.navigate(['']);
+      }
+    });
+  }
+
+}
