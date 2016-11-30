@@ -17,7 +17,7 @@ interface IHttpErrorHandlerService {
 @Injectable()
 export class HttpErrorHandlerService implements IHttpErrorHandlerService {
 
-    constructor(protected router:Router, private errorMessagesEventEmitter:ErrorMessagesEventEmitter) {
+    constructor(private router:Router, private errorMessagesEventEmitter:ErrorMessagesEventEmitter) {
     }
 
     public process(req:Request, observable:Observable<any>):Observable<any> {

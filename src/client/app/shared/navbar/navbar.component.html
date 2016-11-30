@@ -8,8 +8,8 @@
         </div>
         <div class="menu-container ui-g-7 ui-lg-7 ui-sm-12 ui-md-5">
           <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">HOME</a>
-          <a [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">ABOUT</a>
-          <a class="last" (click)="onLogout()" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">LOGOUT</a>
+          <a [ngClass]="{'last' : !login}" [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">ABOUT</a>
+          <a *ngIf="login" class="last" (click)="onLogout()" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">LOGOUT</a>
         </div>
       </nav>
 

@@ -7,6 +7,7 @@ import { GET, PUT, POST, DELETE, BaseUrl, Headers, Header, Produces, MediaType, 
 import {BaseService} from './base.service';
 import {HttpLoaderService} from '../http-loader/index';
 import {HttpErrorHandlerService} from '../http-error-handler/index';
+import {AuthEventEmitter} from "../notification/notification";
 
 @Injectable()
 @BaseUrl('/api/account/')
@@ -20,7 +21,8 @@ export class AccountService extends BaseService {
 
     constructor(protected http:Http,
                 protected httpLoaderService:HttpLoaderService,
-                protected httpErrorHandlerService:HttpErrorHandlerService) {
+                protected httpErrorHandlerService:HttpErrorHandlerService,
+                private authEventEmitter:AuthEventEmitter) {
         super(http, httpLoaderService, httpErrorHandlerService);
     }
 
@@ -65,8 +67,8 @@ export class AccountService extends BaseService {
     public login(admin:Admin):Observable<any> {
         return Observable.create(observer => {
             this.signIn(admin.login, admin.password).subscribe(
-                response => {
-                    this.token = response;
+                result => {
+                    this.putToken(result);
                     observer.next(this.token);
                     observer.complete();
                 },
@@ -81,11 +83,25 @@ export class AccountService extends BaseService {
     public logout():Observable<any> {
         return Observable.create(observer => {
             this.signOut().subscribe(null, null, () => {
-                this.token = null;
+                this.removeToken();
                 observer.next(true);
                 observer.complete();
             });
         });
+    }
+
+    private putToken(token:any):void {
+        this.token = token;
+
+        // notify login
+        this.authEventEmitter.emit(this.token);
+    }
+
+    public removeToken():void {
+        this.token = null;
+
+        // notify logout
+        this.authEventEmitter.emit(null);
     }
 
 }
