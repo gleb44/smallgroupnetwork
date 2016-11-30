@@ -9,7 +9,7 @@ import {HttpLoaderService} from '../http-loader/index';
 import {HttpErrorHandlerService} from '../http-error-handler/index';
 
 @Injectable()
-@BaseUrl('/api/admin/account/')
+@BaseUrl('/api/account/')
 @DefaultHeaders({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
@@ -32,7 +32,8 @@ export class AccountService extends BaseService {
 
     @POST('login')
     @Produces(MediaType.JSON)
-    private signIn(@Body admin:Admin):Observable<any> {
+    private signIn(@Query('login') login?:string,
+                   @Query('password') password?:string):Observable<any> {
         return null;
     }
 
@@ -63,7 +64,7 @@ export class AccountService extends BaseService {
 
     public login(admin:Admin):Observable<any> {
         return Observable.create(observer => {
-            this.signIn(admin).subscribe(
+            this.signIn(admin.login, admin.password).subscribe(
                 response => {
                     this.token = response;
                     observer.next(this.token);

@@ -5,7 +5,6 @@ import com.smallgroupnetwork.model.dto.StudySearch;
 import com.smallgroupnetwork.model.dto.StudySort;
 import com.smallgroupnetwork.persistence.AbstractPersistenceService;
 import com.smallgroupnetwork.persistence.Paging;
-import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,8 +25,7 @@ public class StudyService extends AbstractPersistenceService<Study, Long> implem
 	@Transactional
 	public void incrementViewsCount( Long studyId )
 	{
-		Query query = getSession().getNamedQuery( "Study.incrementViewsCount" ).setParameter( "studyId", studyId );
-		int i = query.executeUpdate();
+		getSession().getNamedQuery( "Study.incrementViewsCount" ).setParameter( "studyId", studyId ).executeUpdate();
 	}
 
 	@Override
@@ -70,7 +68,7 @@ public class StudyService extends AbstractPersistenceService<Study, Long> implem
 		{
 			queryString.append( "\n            ORDER BY created DESC" );
 		}
-		else if ( StudySort.MostPopular.name().equals( sortMode ) )
+		else if( StudySort.MostPopular.name().equals( sortMode ) )
 		{
 			queryString.append( "\n            ORDER BY views_count DESC" );
 		}
@@ -94,15 +92,14 @@ public class StudyService extends AbstractPersistenceService<Study, Long> implem
 		{
 			query.setMaxResults( paging.getLimit() );
 		}
-		List studies = query.list();
-		return studies;
+		return (List<Study>) query.list();
 	}
 
 	@Transactional( readOnly = true )
 	public List<Study> findByPattern( StudySearch search, Paging paging )
 	{
 		String sortMode = paging.getSortColumn();
-		if ( StudySort.MostPopular.name().equals( sortMode ) )
+		if( StudySort.MostPopular.name().equals( sortMode ) )
 		{
 			paging.setSortColumn( "viewsCount" );
 		}

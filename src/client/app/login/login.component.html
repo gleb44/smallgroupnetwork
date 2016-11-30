@@ -10,7 +10,7 @@
                         <p>Register now for the Small Group Network and receive a free resource that can help train your volunteer army to be better leaders and resources to your small group community.</p>
 
                         <form (submit)="signInUser()" #userForm="ngForm" class="new_login_page" novalidate="novalidate">
-                            <input type="text" pInputText [(ngModel)]="model.email" name="email" id="email" #email="ngModel" placeholder="Email address" value="" class="">
+                            <input type="text" pInputText [(ngModel)]="model.login" name="login" id="login" #login="ngModel" placeholder="Login" value="" class="">
                             <input type="password" pPassword="" [(ngModel)]="model.password" name="password" id="password" #password="ngModel" placeholder="Password" class="" required>
                             <button pButton type="submit" class="register-button" label="Register" [disabled]="!userForm.form.valid"></button>
                             <p>Already have an account? <a [routerLink]="['/']" class="new_login_login">Login</a></p>

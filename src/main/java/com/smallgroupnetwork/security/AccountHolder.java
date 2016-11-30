@@ -1,6 +1,7 @@
 package com.smallgroupnetwork.security;
 
-import com.smallgroupnetwork.model.Admin;
+import com.smallgroupnetwork.model.AdminAccess;
+import com.smallgroupnetwork.model.User;
 
 /**
  * User: gleb
@@ -10,18 +11,29 @@ import com.smallgroupnetwork.model.Admin;
 public class AccountHolder
 {
 	public static final String USER_KEY = "com.smallgroupnetwork.user.auth";
-	public static final String ADMIN_KEY = "com.smallgroupnetwork.admin.auth";
 	public static final String FILES_KEY = "com.smallgroupnetwork.admin.files";
 
-	private static ThreadLocal<Admin> adminHolder = new ThreadLocal<>();
+	private static ThreadLocal<UserAuthentication> userHolder = new ThreadLocal<>();
 
-	public static void setAdmin( Admin admin )
+	public static User getUser()
 	{
-		adminHolder.set( admin );
+		UserAuthentication userAuthentication = userHolder.get();
+		return userAuthentication == null ? null : userAuthentication.getUser();
 	}
 
-	public static Admin getAdmin()
+	public static AdminAccess getAdminAccess()
 	{
-		return adminHolder.get();
+		User user = getUser();
+		return user == null ? null : user.getAdminAccess();
+	}
+
+	public static UserAuthentication getUserAuthentication()
+	{
+		return userHolder.get();
+	}
+
+	public static void setUserAuthentication( UserAuthentication user )
+	{
+		userHolder.set( user );
 	}
 }

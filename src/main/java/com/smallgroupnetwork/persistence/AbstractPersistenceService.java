@@ -4,7 +4,7 @@ import com.smallgroupnetwork.validation.ValidationException;
 import com.smallgroupnetwork.validation.ValidationResult;
 import org.hibernate.CacheMode;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
@@ -351,7 +351,7 @@ public class AbstractPersistenceService<T extends BaseEntity<I>, I extends Seria
 								}
 							}
 						}
-						catch( Exception e )
+						catch( Exception ignored )
 						{
 						}
 

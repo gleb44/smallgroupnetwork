@@ -1,6 +1,6 @@
 package com.smallgroupnetwork.service;
 
-import com.smallgroupnetwork.model.Admin;
+import com.smallgroupnetwork.model.Account;
 import com.smallgroupnetwork.persistence.IPersistenceService;
 
 /**
@@ -8,11 +8,11 @@ import com.smallgroupnetwork.persistence.IPersistenceService;
  * Date: 5/14/14
  * Time: 3:29 PM
  */
-public interface IAdminService extends IPersistenceService<Admin, Long>
+public interface IAccountService extends IPersistenceService<Account, Long>
 {
-	Admin findAccountAndLogin( String login, String password );
+	Account findAccount( String login, String password );
 
-	Admin findByLogin( final String login );
+	Account findByLogin( final String login );
 
 	void changePassword( String login, String password, String newPassword );
 }

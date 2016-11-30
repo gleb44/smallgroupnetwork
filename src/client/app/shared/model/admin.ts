@@ -2,6 +2,6 @@ import {BaseModel} from "./base-model";
 
 export class Admin extends BaseModel<string>
 {
-    email:string;
+    login:string;
     password:string;
 }

@@ -1,8 +1,7 @@
 package com.smallgroupnetwork.service;
 
-import com.smallgroupnetwork.model.Admin;
+import com.smallgroupnetwork.model.Account;
 import com.smallgroupnetwork.persistence.AbstractPersistenceService;
-import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,74 +16,72 @@ import javax.annotation.Resource;
  * Time: 3:30 PM
  */
 @Service
-public class AdminService extends AbstractPersistenceService<Admin, Long> implements IAdminService
+public class AccountService extends AbstractPersistenceService<Account, Long> implements IAccountService
 {
 	@Resource( name = "passwordEncoder" )
 	private PasswordEncoder passwordEncoder;
 
 	@Override
 	@Transactional
-	public Admin merge( Admin admin )
+	public void saveOrUpdate( Account account )
 	{
 		try
 		{
-			if( admin.getId() != null && admin.getPassword() == null )
+			if( account.getId() != null && account.getPassword() == null )
 			{
-				Admin oldAdmin = load( admin.getId() );
-				admin.setPassword( oldAdmin.getPassword() );
+				Account oldAccount = load( account.getId() );
+				account.setPassword( oldAccount.getPassword() );
 			}
 			else
 			{
-				admin.setPassword( passwordEncoder.encode( admin.getPassword() ) );
+				account.setPassword( passwordEncoder.encode( account.getPassword() ) );
 			}
-			return super.merge( admin );
+			super.saveOrUpdate( account );
 		}
 		catch( ConstraintViolationException ex )
 		{
-			addValidationResult( "login", "admin.login.duplicate", admin.getEmail() );
+			addValidationResult( "login", "account.login.duplicate", account.getLogin() );
 			validate();
-			return null;
 		}
 	}
 
 	@Override
 	@Transactional( readOnly = true )
-	public Admin findAccountAndLogin( String login, String password )
+	public Account findAccount( String login, String password )
 	{
 		if( login == null || password == null )
 		{
 			addValidationResult( "password", "user.password.empty" );
 			validate();
 		}
-		Admin admin = findByLogin( login );
-		if( admin == null )
+		Account account = findByLogin( login );
+		if( account == null )
 		{
 			addValidationResult( "login", "user.login.invalid", login );
 			validate();
 			return null;
 		}
-		if( !passwordEncoder.matches( password, admin.getPassword() ) )
+		if( !passwordEncoder.matches( password, account.getPassword() ) )
 		{
 			addValidationResult( "login", "user.password.invalid", login );
 			validate();
 		}
-		return admin;
+		return account;
 	}
 
 	@Override
 	@Transactional( readOnly = true )
-	public Admin findByLogin( final String login )
+	public Account findByLogin( final String login )
 	{
-		Criteria criteria = getSession().createCriteria( getEntityClass() ).add( Restrictions.eq( "email", login.toLowerCase() ) );
-		return (Admin) criteria.uniqueResult();
+		return (Account) createCriteria().add( Restrictions.eq( "login", login.toLowerCase() ) ).uniqueResult();
 	}
 
 	@Override
 	@Transactional
 	public void changePassword( String login, String password, String newPassword )
 	{
-		Admin admin = findAccountAndLogin( login, password );
-		admin.setPassword( passwordEncoder.encode( newPassword ) );
+		Account account = findAccount( login, password );
+		account.setPassword( passwordEncoder.encode( newPassword ) );
 	}
 
 }

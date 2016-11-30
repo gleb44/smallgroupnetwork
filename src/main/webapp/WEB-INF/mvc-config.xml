@@ -47,8 +47,13 @@
             <bean class="com.smallgroupnetwork.web.interceptor.JsonNoCacheInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
+            <mvc:mapping path="/api/**"/>
+            <mvc:exclude-mapping path="/api/account/**"/>
+            <mvc:exclude-mapping path="/api/public/**"/>
+            <bean class="com.smallgroupnetwork.web.interceptor.UserAuthorizationInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
             <mvc:mapping path="/api/admin/**"/>
-            <mvc:exclude-mapping path="/api/admin/account/**"/>
             <bean class="com.smallgroupnetwork.web.interceptor.AdminAuthorizationInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

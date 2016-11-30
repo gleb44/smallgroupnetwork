@@ -1,6 +1,6 @@
 package com.smallgroupnetwork.service.conversion.processors;
 
-import com.smallgroupnetwork.model.Person;
+import com.smallgroupnetwork.model.User;
 import com.smallgroupnetwork.persistence.BaseEntity;
 import com.smallgroupnetwork.persistence.ICriteriaModifier;
 import com.smallgroupnetwork.persistence.IPartialResultCallback;
@@ -42,7 +42,7 @@ public abstract class AbstractDataProcessor<T extends BaseEntity<I>, I extends S
 		}
 	}
 
-	protected String getFullName( Person user )
+	protected String getFullName( User user )
 	{
 		return user.getFirstName() + " " + user.getLastName();
 	}
