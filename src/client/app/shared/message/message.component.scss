@@ -1,5 +1,7 @@
 .messages-cont {
+  .ui-growl{
 
+  }
   .ui-accordion {
     .ui-accordion-header.ui-state-default {
       border: 0;
@@ -11,78 +13,4 @@
       }
     }
   }
-
-
-  //position: fixed;
-  //width: 100%;
-  //top: 10px;
-  //z-index: 1000;
-  //
-  //.modal {
-  //  overflow: auto;
-  //  position: relative;
-  //
-  //  .modal-dialog {
-  //    .modal-content {
-  //      .panel-modal {
-  //        &.alert-connect {
-  //          .panel-body {
-  //            table {
-  //              width: 100%;
-  //
-  //              tr {
-  //                td {
-  //                  &.msg {
-  //                    width: 120px;
-  //                  }
-  //
-  //                  &.progress {
-  //                    margin: 0;
-  //                    opacity: 0.6;
-  //
-  //                    .progress-bar-striped {
-  //                      background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
-  //                      background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
-  //                      background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
-  //                      -webkit-background-size: 40px 40px;
-  //                      background-size: 40px 40px;
-  //
-  //                      -webkit-animation: progress-bar-stripes 2s linear infinite;
-  //                      -o-animation: progress-bar-stripes 2s linear infinite;
-  //                      animation: progress-bar-stripes 2s linear infinite;
-  //                    }
-  //                  }
-  //                }
-  //              }
-  //            }
-  //          }
-  //        }
-  //
-  //        .close {
-  //          margin-top: 5px;
-  //        }
-  //
-  //        .panel-body {
-  //          h4 {
-  //            text-align: left;
-  //          }
-  //
-  //          .fa-button {
-  //            display: block;
-  //            width: 100px;
-  //            margin: 20px auto 11px auto;
-  //          }
-  //        }
-  //      }
-  //    }
-  //  }
-  //}
-  //
-  //.alert {
-  //  opacity: 0.8;
-  //
-  //  .close {
-  //    margin-left: 10px;
-  //  }
-  //}
 }

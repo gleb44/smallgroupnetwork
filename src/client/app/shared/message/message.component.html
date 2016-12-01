@@ -1,16 +1,14 @@
 <div class="messages-cont" [hidden]="messages.length === 0">
-
-    <div class="ui-growl ui-widget" *ngFor="let message of messages" style="z-index: 1072; opacity: 1.016;">
+    <div class="ui-growl ui-widget" *ngFor="let message of messages; let messageIndex = index;" style="z-index: 1072; opacity: 1.016;">
         <div aria-live="polite" class="ui-growl-item-container ui-state-highlight ui-corner-all ui-shadow" [ngClass]="message.type=='danger' ? 'ui-growl-message-error' : 'ui-growl-message-info' ">
-
             <div class="ui-growl-item">
-                <div class="ui-growl-icon-close fa fa-close" (click)="closeAlertMessage($index)"></div>
+                <div class="ui-growl-icon-close fa fa-close" (click)="closeAlertMessage(messageIndex)"></div>
                 <span class="ui-growl-image fa fa-2x ui-growl-image-info fa-close"></span>
-                <div class="ui-growl-message" *ngFor="let item of message.items">
+                <div class="ui-growl-message" *ngFor="let item of message.items; let messageItemIndex = index;">
                     <span class="ui-growl-title" [textContent]="message.type"></span>
                     <div [textContent]="item.msg"></div>
                     <div class="ui-accordion ui-widget ui-helper-reset" *ngIf="item.trace">
-                        <div (click)="showTrace(item)" class="ui-accordion-header ui-state-default ui-corner-all">
+                        <div (click)="showTrace(messageIndex, messageItemIndex)" class="ui-accordion-header ui-state-default ui-corner-all">
                             <span class="fa fa-fw" [ngClass]="item.traceOpen ? 'fa-caret-down' : 'fa-caret-right' "></span>
                             <a role="tab" aria-expanded="item.traceOpen" aria-selected="item.traceOpen">{{item.name}}</a>
                         </div>
@@ -25,7 +23,6 @@
                 </div>
                 <div style="clear: both;"></div>
             </div>
-
         </div>
     </div>
 </div>
