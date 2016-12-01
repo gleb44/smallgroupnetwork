@@ -21,6 +21,7 @@ export class AuthGuardService implements CanActivate, CanDeactivate<CanComponent
                     observer.next(true);
                 },
                 err => {
+                    this.router.navigate(['login']);
                     observer.next(false);
                 },
                 ()=> {

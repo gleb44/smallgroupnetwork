@@ -1,0 +1,49 @@
+{
+  "build.dev": [
+    "clean.once",
+    "build.assets.dev",
+    "build.fonts",
+    "build.html_css",
+    "build.js.dev",
+    "build.bundles.dev",
+    "build.bundles.app.dev",
+    "build.index.dev"
+  ],
+
+  "build.dev.watch": [
+    "build.dev",
+    "watch.dev"
+  ],
+
+  "build.prod": [
+    "check.tools",
+    "clean.app",
+    "tslint",
+    "build.assets.prod",
+    "build.fonts",
+    "build.html_css",
+    "copy.prod",
+    "build.js.prod",
+    "build.bundles",
+    "build.bundles.app",
+    "minify.bundles",
+    "build.index.prod"
+  ],
+
+  "build.prod.exp": [
+    "check.tools",
+    "clean.app",
+    "tslint",
+    "build.assets.prod",
+    "build.fonts",
+    "build.html_css",
+    "copy.prod",
+    "compile.ahead.prod",
+    "build.js.prod.exp",
+    "build.bundles",
+    "build.bundles.app.exp",
+    "minify.bundles",
+    "build.index.prod"
+  ]
+}
+

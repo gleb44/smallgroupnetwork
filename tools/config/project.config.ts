@@ -143,6 +143,13 @@ export class ProjectConfig {
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
 
   /**
+   * Project tasks which are composition of other tasks
+   * and aim to override the tasks defined in
+   * SEED_COMPOSITE_TASKS.
+   */
+  PROJECT_COMPOSITE_TASKS = join(process.cwd(), this.TOOLS_DIR, 'config', 'project.tasks.json');
+
+  /**
    * The base folder for built files.
    * @type {string}
    */
@@ -515,7 +522,7 @@ function filterDependency(type: string, d: InjectableDependency): boolean {
   if (!(d.buildType instanceof Array)) {
     (<any>d).env = [d.buildType];
   }
-  return d.buildType.indexOf(type) >= 0;
+  return (<any>d.buildType).indexOf(type) >= 0;
 }
 
 /**

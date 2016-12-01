@@ -1,4 +1,5 @@
-import { existsSync, lstatSync, readdirSync } from 'fs';
+import { existsSync, lstatSync, readFileSync, readdirSync } from 'fs';
+import * as runSequence from 'run-sequence';
 import * as gulp from 'gulp';
 import * as util from 'gulp-util';
 import * as isstream from 'isstream';
@@ -15,6 +16,86 @@ import { Task } from '../../tasks/task';
 export function loadTasks(path: string): void {
   util.log('Loading tasks folder', util.colors.yellow(path));
   readDir(path, taskname => registerTask(taskname, path));
+}
+
+function validateTasks(tasks: any) {
+  return Object.keys(tasks)
+      .map((taskName: string) => {
+        if (!tasks[taskName] ||
+            !Array.isArray(tasks[taskName]) ||
+            tasks[taskName].some((t: any) => typeof t !== 'string')) {
+          return taskName;
+        }
+        return null;
+      }).filter((taskName: string) => !!taskName);
+}
+
+function registerTasks(tasks: any) {
+  Object.keys(tasks)
+      .forEach((t: string) => {
+        gulp.task(t, (done: any) => runSequence.apply(null, [...tasks[t], done]));
+      });
+}
+
+function getInvalidTaskErrorMessage(invalid: string[], file: string) {
+  let error = `Invalid configuration in "${file}. `;
+  if (invalid.length === 1) {
+    error += 'Task';
+  } else {
+    error += 'Tasks';
+  }
+  error += ` ${invalid.map((t: any) => `"${t}"`).join(', ')} do not have proper format.`;
+  return error;
+}
+
+/**
+ * Defines complex, composite tasks. The composite tasks
+ * are simply a composition of another tasks.
+ * Each composite tasks has the following format:
+ *
+ * "composite_task": ["task1", "task2"]
+ *
+ * This means that the format should be flat, with no nesting.
+ *
+ * The existing composite tasks are defined in
+ * "tools/config/seed.tasks.json" and can be overriden by
+ * editing the composite tasks project configuration.
+ *
+ * By default it is located in: "tools/config/project.tasks.json".
+ *
+ * Override existing tasks by simply providing a task
+ * name and a list of tasks that this task hould execute.
+ *
+ * For instance:
+ * ```
+ * {
+ *  "test": [
+ *    "build.test",
+ *    "mocha.run"
+ *  ]
+ * }
+ * ```
+ *
+ * Note that the tasks do not support nested objects.
+ */
+export function loadCompositeTasks(projectTasksFile: string): void {
+  let projectTasks: any;
+  try {
+    projectTasks = JSON.parse(readFileSync(projectTasksFile).toString());
+  } catch (e) {
+    util.log('Cannot load the task configuration files: ' + e.toString());
+    return;
+  }
+
+  const invalid = validateTasks(projectTasks);
+  if (invalid.length) {
+    const errorMessage = getInvalidTaskErrorMessage(invalid, projectTasksFile);
+    util.log(util.colors.red(errorMessage));
+    process.exit(1);
+  }
+
+  const mergedTasks = Object.assign({}, projectTasks);
+  registerTasks(mergedTasks);
 }
 
 function normalizeTask(task: any, taskName: string) {
@@ -40,8 +121,7 @@ function normalizeTask(task: any, taskName: string) {
       }
     };
   }
-  throw new Error(taskName + ' should be instance of the class ' +
-    'Task, a function or a class which extends Task.');
+  throw new Error(taskName + ' should be instance of the class Task, a function or a class which extends Task.');
 }
 
 /**
