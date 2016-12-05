@@ -12,7 +12,7 @@
     "build.prod": "gulp build.prod --color --env-config prod --build-type prod",
     "build.prod.exp": "gulp build.prod.exp --color --env-config prod --build-type prod",
     "gulp": "gulp",
-    "lint": "tslint src/**/*.ts tools/**/*.ts",
+    "lint": "tslint -e **/*.d.ts src/**/*.ts tools/**/*.ts",
     "clean.tools": "gulp clean.build.tools",
     "build.tools": "gulp build.tools",
     "postinstall": "gulp build.bundle.rxjs && npm prune",
