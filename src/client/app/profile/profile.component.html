@@ -4,8 +4,8 @@
             <div class="ui-md-12 ui-sm-12">
                 <h1>PROFILE</h1>
             </div>
-            <div class="ui-g-2"></div>
-            <div class="ui-g-8">
+            <div class="ui-g-3"></div>
+            <div class="ui-g-6">
                 <form (submit)="onSubmit()" #userForm="ngForm" novalidate="novalidate">
                     <div class="table-container">
                         <div class="table-row">
@@ -13,7 +13,7 @@
                                 <h3 class="first">FIRST NAME:</h3>
                             </div>
                             <div class="table-middle">
-                                <input id="firstName" name="firstName" type="text" size="30" pInputText [(ngModel)]="user.firstName" #firstName="ngModel" required/>
+                                <input id="firstName" name="firstName" type="text" pInputText [(ngModel)]="user.firstName" #firstName="ngModel" required/>
                             </div>
                         </div>
                         <div class="table-row">
@@ -21,7 +21,7 @@
                                 <h3 class="first">LAST NAME:</h3>
                             </div>
                             <div class="table-middle">
-                                <input id="lastName" name="lastName" type="text" size="30" pInputText [(ngModel)]="user.lastName" #lastName="ngModel" required/>
+                                <input id="lastName" name="lastName" type="text" pInputText [(ngModel)]="user.lastName" #lastName="ngModel" required/>
                             </div>
                         </div>
                         <div class="table-row">
@@ -29,7 +29,7 @@
                                 <h3 class="first">EMAIL:</h3>
                             </div>
                             <div class="table-middle">
-                                <input id="email" name="email" type="text" size="30" pInputText [(ngModel)]="user.email" #lastName="ngModel" required/>
+                                <input id="email" name="email" type="text" pInputText [(ngModel)]="user.email" #lastName="ngModel" required/>
                             </div>
                         </div>
                         <div class="table-row">
@@ -50,7 +50,7 @@
                                 <h3 class="first">COUNTRY:</h3>
                             </div>
                             <div class="table-middle">
-                                <input id="country" name="country" type="text" size="30" pInputText [(ngModel)]="user.profile.country" #country="ngModel"/>
+                                <input id="country" name="country" type="text" pInputText [(ngModel)]="user.profile.country" #country="ngModel"/>
                             </div>
                         </div>
                         <div class="table-row">
@@ -58,7 +58,7 @@
                                 <h3 class="first">STATE:</h3>
                             </div>
                             <div class="table-middle">
-                                <input id="state" name="state" type="text" size="30" pInputText [(ngModel)]="user.profile.state" #state="ngModel"/>
+                                <input id="state" name="state" type="text" pInputText [(ngModel)]="user.profile.state" #state="ngModel"/>
                             </div>
                         </div>
                         <div class="table-row">
@@ -66,7 +66,7 @@
                                 <h3 class="first">POSTAL CODE:</h3>
                             </div>
                             <div class="table-middle">
-                                <input id="postalCode" name="postalCode" type="text" size="30" pInputText [(ngModel)]="user.profile.postalCode" #postalCode="ngModel"/>
+                                <input id="postalCode" name="postalCode" type="text" pInputText [(ngModel)]="user.profile.postalCode" #postalCode="ngModel"/>
                             </div>
                         </div>
                         <div class="table-row">
@@ -74,7 +74,7 @@
                                 <h3 class="first">CITY:</h3>
                             </div>
                             <div class="table-middle">
-                                <input id="city" name="city" type="text" size="30" pInputText [(ngModel)]="user.profile.city" #city="ngModel"/>
+                                <input id="city" name="city" type="text" pInputText [(ngModel)]="user.profile.city" #city="ngModel"/>
                             </div>
                         </div>
                         <div class="table-row">
@@ -82,7 +82,7 @@
                                 <h3 class="first">ADDRESS:</h3>
                             </div>
                             <div class="table-middle">
-                                <input id="address" name="address" type="text" max="512" size="30" pInputText [(ngModel)]="user.profile.address" #address="ngModel"/>
+                                <input id="address" name="address" type="text" max="512" pInputText [(ngModel)]="user.profile.address" #address="ngModel"/>
                             </div>
                         </div>
                         <div class="table-row">
@@ -93,7 +93,7 @@
                     </div>
                 </form>
             </div>
-            <div class="ui-g-2"></div>
+            <div class="ui-g-3"></div>
         </div>
     </div>
 </div>
