@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Admin} from '../model/admin';
+import {Account, User} from '../model/index';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
@@ -16,8 +16,6 @@ import {AuthEventEmitter} from "../notification/notification";
     'Content-Type': 'application/json'
 })
 export class AccountService extends BaseService {
-
-    token:Admin = null;
 
     constructor(protected http:Http,
                 protected httpLoaderService:HttpLoaderService,
@@ -44,6 +42,14 @@ export class AccountService extends BaseService {
         return null;
     }
 
+    @PUT('user')
+    @Produces(MediaType.JSON)
+    public update(@Body user:User):Observable<any> {
+        return null;
+    }
+    
+    private token:User = null;
+
     public getInfo():Observable<any> {
         return Observable.create(observer => {
             if (this.token) {
@@ -52,7 +58,7 @@ export class AccountService extends BaseService {
             } else {
                 this.info().subscribe(
                     result => {
-                        this.token = result;
+                        this.token = <User>result;
                         observer.next(this.token);
                         observer.complete();
                     },
@@ -64,9 +70,9 @@ export class AccountService extends BaseService {
         });
     }
 
-    public login(admin:Admin):Observable<any> {
+    public login(account:Account):Observable<any> {
         return Observable.create(observer => {
-            this.signIn(admin.login, admin.password).subscribe(
+            this.signIn(account.login, account.password).subscribe(
                 result => {
                     this.putToken(result);
                     observer.next(this.token);
@@ -91,13 +97,13 @@ export class AccountService extends BaseService {
     }
 
     private putToken(token:any):void {
-        this.token = token;
+        this.token = <User>token;
 
         // notify login
         this.authEventEmitter.emit(this.token);
     }
 
-    public removeToken():void {
+    private removeToken():void {
         this.token = null;
 
         // notify logout

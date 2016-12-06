@@ -34,7 +34,7 @@ export class HttpErrorHandlerService implements IHttpErrorHandlerService {
     }
 
     private process401(err:any):Observable<any> {
-        this.errorMessagesEventEmitter.emit(['Unauthorized!']);
+        // this.errorMessagesEventEmitter.emit(['Unauthorized!']);
 
         return Observable.throw(err);
     }

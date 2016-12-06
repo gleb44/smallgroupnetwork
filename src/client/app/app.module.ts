@@ -10,6 +10,7 @@ import { routes } from './app.routes';
 
 import { HomeModule } from './home/home.module';
 import { AboutModule } from './about/about.module';
+import { ProfileModule } from "./profile/profile.module";
 import { LoginModule } from "./login/login.module";
 import { AdminModule } from "./admin/admin.module";
 import { SharedModule } from './shared/shared.module';
@@ -25,6 +26,7 @@ import { AdminDashboardModule } from "./admin-dashboard/admin-dashboard.module";
 
     HomeModule,
     AboutModule,
+    ProfileModule,
     LoginModule,
     AdminModule,
     AdminDashboardModule

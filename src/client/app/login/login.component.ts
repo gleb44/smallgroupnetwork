@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 
-import {AccountService, Admin} from '../shared/index';
+import {AccountService, Account} from '../shared/index';
 import {adminPath} from "../admin/admin.routes";
 
 /**
@@ -16,18 +16,18 @@ import {adminPath} from "../admin/admin.routes";
 
 export class LoginComponent {
 
-  model = new Admin();
+  model = new Account();
 
   constructor(public router:Router, public accountService:AccountService) {
   }
 
   signInUser() {
     this.accountService.login(this.model).subscribe(response => {
-      this.afterSignIn(<Admin>response);
+      this.afterSignIn(<Account>response);
     });
   }
 
-  afterSignIn(user: Admin) {
+  afterSignIn(user: Account) {
     this.router.navigate([adminPath]);
   }
 }
