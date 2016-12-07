@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
     constructor(private accountService:AccountService) {
     }
 
-    ngOnInit() {
+    private init() {
         this.accountService.getInfo().subscribe(info => {
             let user:User = jQuery.extend(true, {}, info);
             user.adminAccess = null;
@@ -26,11 +26,19 @@ export class ProfileComponent implements OnInit {
         });
     }
 
+    ngOnInit() {
+        this.init();
+    }
+
     onSubmit() {
         let user:User = jQuery.extend(true, {}, this.user);
         user.profile.birthDate = user.profile.birthDate ? user.profile.birthDate.getTime() : null;
         this.accountService.update(user).subscribe(response => {
             console.log('User Updated...');
         });
+    }
+
+    onCancel() {
+        this.init();
     }
 }

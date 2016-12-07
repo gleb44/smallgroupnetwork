@@ -10,6 +10,11 @@ input {
   width: 100%;
 }
 
+button {
+  display: inline-block;
+  margin: 10px;
+}
+
 .table-container {
   $table-coll-padding: 0.5em;
 
