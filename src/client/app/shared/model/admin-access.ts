@@ -4,11 +4,6 @@ export enum AdminRole {
     Admin, Staff
 }
 
-export class AdminAccess extends BaseModel<number> {
+export class AdminAccess extends BaseModel {
     public adminRole:AdminRole;
-
-    constructor(id?:number, adminRole?:AdminRole) {
-        super(id);
-        this.adminRole = adminRole;
-    }
 }

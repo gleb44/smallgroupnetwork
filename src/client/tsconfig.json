@@ -23,7 +23,8 @@
       "express",
       "node",
       "systemjs",
-      "jquery"
+      "jquery",
+      "reflect-metadata"
     ]
   },
   "exclude": [

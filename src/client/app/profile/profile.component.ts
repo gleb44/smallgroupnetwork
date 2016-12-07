@@ -12,21 +12,24 @@ import {User, AccountService} from "../shared/index";
 })
 export class ProfileComponent implements OnInit {
 
-    user:User;
+    public user:User;
 
     constructor(private accountService:AccountService) {
     }
 
     ngOnInit() {
         this.accountService.getInfo().subscribe(info => {
-            this.user = <User>Object.assign(new User(), info);
-            this.user.adminAccess = null;
-            this.user.profile.birthDate = new Date(this.user.profile.birthDate); // TODO fix it
+            let user:User = jQuery.extend(true, {}, info);
+            user.adminAccess = null;
+            user.profile.birthDate = new Date(user.profile.birthDate);
+            this.user = user;
         });
     }
 
     onSubmit() {
-        this.accountService.update(this.user).subscribe(response => {
+        let user:User = jQuery.extend(true, {}, this.user);
+        user.profile.birthDate = user.profile.birthDate ? user.profile.birthDate.getTime() : null;
+        this.accountService.update(user).subscribe(response => {
             console.log('User Updated...');
         });
     }
