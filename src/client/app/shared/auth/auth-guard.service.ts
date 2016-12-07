@@ -16,17 +16,14 @@ export class AuthGuardService implements CanActivate, CanDeactivate<CanComponent
 
     canActivate(route:ActivatedRouteSnapshot, state:RouterStateSnapshot):Observable<boolean> | boolean {
         return Observable.create(observer => {
-            this.accountService.getInfo().subscribe(
-                info => {
-                    observer.next(true);
-                },
-                err => {
-                    this.router.navigate(['login']);
-                    observer.next(false);
-                },
-                ()=> {
-                    observer.complete()
-                });
+            this.accountService.getInfo().subscribe(info => {
+                observer.next(true);
+            }, error => {
+                this.router.navigate(['login']);
+                observer.next(false);
+            }, ()=> {
+                observer.complete()
+            });
         });
     }
 

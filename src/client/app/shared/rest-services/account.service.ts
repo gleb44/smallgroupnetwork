@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Account, User} from '../model/index';
 import {Http} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from "rxjs/Rx";
 
 import { GET, PUT, POST, DELETE, BaseUrl, Headers, Header, Produces, MediaType, DefaultHeaders, Path, Body, Query } from './rest-client';
 import {BaseService} from './base.service';
@@ -48,66 +48,46 @@ export class AccountService extends BaseService {
         return null;
     }
     
-    private token:User = null;
+    private token:Promise<any> = null;
 
     public getInfo():Observable<any> {
-        return Observable.create(observer => {
-            if (this.token) {
-                observer.next(this.token);
-                observer.complete();
-            } else {
-                this.info().subscribe(
-                    result => {
-                        this.token = <User>result;
-                        observer.next(this.token);
-                        observer.complete();
-                    },
-                    error => {
-                        observer.error(error);
-                        observer.complete();
-                    });
-            }
-        });
+        if(!this.token) {
+            let self = this;
+            this.token = new Promise<any>(function(resolve, reject) {
+                self.info().subscribe(result => {
+                    resolve(result);
+                },error => {
+                    reject(error);
+                });
+            });
+        }
+        return Observable.fromPromise(this.token);
     }
 
     public login(account:Account):Observable<any> {
-        return Observable.create(observer => {
-            this.signIn(account.login, account.password).subscribe(
-                result => {
-                    this.putToken(result);
-                    observer.next(this.token);
-                    observer.complete();
-                },
-                error => {
-                    observer.error(error);
-                    observer.complete();
-                }
-            );
+        let self = this;
+        let promise = new Promise<any>(function (resolve, reject) {
+            self.signIn(account.login, account.password).subscribe(result => {
+                resolve(result);
+
+                self.token = promise;
+                self.authEventEmitter.emit(result); // notify login
+            }, error => {
+                reject(error);
+            });
         });
+        return Observable.fromPromise(promise);
     }
 
     public logout():Observable<any> {
         return Observable.create(observer => {
             this.signOut().subscribe(null, null, () => {
-                this.removeToken();
+                this.token = null;
+                this.authEventEmitter.emit(null); // notify logout
+
                 observer.next(true);
                 observer.complete();
             });
         });
     }
-
-    private putToken(token:any):void {
-        this.token = <User>token;
-
-        // notify login
-        this.authEventEmitter.emit(this.token);
-    }
-
-    private removeToken():void {
-        this.token = null;
-
-        // notify logout
-        this.authEventEmitter.emit(null);
-    }
-
 }
