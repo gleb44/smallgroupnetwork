@@ -3,7 +3,7 @@ import {Account, User} from '../model/index';
 import {Http} from '@angular/http';
 import {Observable} from "rxjs/Rx";
 
-import { GET, PUT, POST, DELETE, BaseUrl, Headers, Header, Produces, MediaType, DefaultHeaders, Path, Body, Query } from './rest-client';
+import {GET, PUT, POST, DELETE, BaseUrl, Headers, Header, Produces, MediaType, DefaultHeaders, Path, Body, Query} from './rest-client';
 import {BaseService} from './base.service';
 import {HttpLoaderService} from '../http-loader/index';
 import {HttpErrorHandlerService} from '../http-error-handler/index';
@@ -47,16 +47,16 @@ export class AccountService extends BaseService {
     public update(@Body user:User):Observable<any> {
         return null;
     }
-    
+
     private token:Promise<any> = null;
 
     public getInfo():Observable<any> {
-        if(!this.token) {
+        if (!this.token) {
             let self = this;
-            this.token = new Promise<any>(function(resolve, reject) {
+            this.token = new Promise<any>(function (resolve, reject) {
                 self.info().subscribe(result => {
                     resolve(result);
-                },error => {
+                }, error => {
                     reject(error);
                 });
             });
