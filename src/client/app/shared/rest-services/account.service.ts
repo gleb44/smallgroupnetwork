@@ -51,16 +51,18 @@ export class AccountService extends BaseService {
     private token:Promise<any> = null;
 
     public getInfo():Observable<any> {
-        if (!this.token) {
-            let self = this;
-            this.token = new Promise<any>(function (resolve, reject) {
-                self.info().subscribe(result => {
-                    resolve(result);
-                }, error => {
-                    reject(error);
-                });
+        return this.token ? Observable.fromPromise(this.token) : this.updateInfo();
+    }
+
+    public updateInfo():Observable<any> {
+        let self = this;
+        this.token = new Promise<any>(function (resolve, reject) {
+            self.info().subscribe(result => {
+                resolve(result);
+            }, error => {
+                reject(error);
             });
-        }
+        });
         return Observable.fromPromise(this.token);
     }
 

@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
         user.profile.birthDate = user.profile.birthDate ? user.profile.birthDate.getTime() : null;
         this.accountService.update(user).subscribe(response => {
             console.log('User Updated...');
+            this.accountService.updateInfo();
         });
     }
 
@@ -49,14 +50,15 @@ export class ProfileComponent implements OnInit {
 
     onUpload(event) {
         this.user.avatar = JSON.parse(event.xhr.response);
-        // TODO Update token avatar
+        console.log('User Avatar Updated...');
+        this.accountService.updateInfo();
     }
 
     avatarURL():string {
-        return this.user.avatar ? this.attachURL(this.user.avatar) : '';
+        return this.user.avatar ? ProfileComponent.attachURL(this.user.avatar) : '';
     };
 
-    private attachURL(attach):string {
+    private static attachURL(attach):string {
         if (attach.path) {
             var search = new URLSearchParams();
             search.set('path', attach.path);
