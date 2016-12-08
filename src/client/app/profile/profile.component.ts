@@ -31,6 +31,10 @@ export class ProfileComponent implements OnInit {
         this.init();
     }
 
+    onCancel() {
+        this.init();
+    }
+
     onSubmit() {
         let user:User = jQuery.extend(true, {}, this.user);
         user.profile.birthDate = user.profile.birthDate ? user.profile.birthDate.getTime() : null;
@@ -38,10 +42,6 @@ export class ProfileComponent implements OnInit {
             console.log('User Updated...');
             this.accountService.updateInfo();
         });
-    }
-
-    onCancel() {
-        this.init();
     }
 
     /**

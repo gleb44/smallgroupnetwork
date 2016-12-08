@@ -19,13 +19,12 @@
                             <input type="text" pInputText [(ngModel)]="model.login" name="login" id="login" #login="ngModel" placeholder="Login" value="" class="">
                             <input type="password" pPassword="" [(ngModel)]="model.password" name="password" id="password" #password="ngModel" placeholder="Password" class="" required>
                             <button pButton type="submit" class="register-button" label="Register" [disabled]="!userForm.form.valid"></button>
-                            <p>Already have an account? <a [routerLink]="['/']" class="new_home_login">Login</a></p>
+                            <p>Already have an account? <a [routerLink]="['/login']" class="new_home_login">Login</a></p>
                         </form>
 
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <div class="sn-container home-map">
