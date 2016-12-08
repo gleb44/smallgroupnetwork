@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {User, AccountService} from "../shared/index";
+import {URLSearchParams} from "@angular/http";
 
 /**
  * This class represents the lazy loaded ProfileComponent.
@@ -41,4 +42,29 @@ export class ProfileComponent implements OnInit {
     onCancel() {
         this.init();
     }
+
+    /**
+     * FileUpload
+     */
+
+    onUpload(event) {
+        this.user.avatar = JSON.parse(event.xhr.response);
+        // TODO Update token avatar
+    }
+
+    avatarURL():string {
+        return this.user.avatar ? this.attachURL(this.user.avatar) : '';
+    };
+
+    private attachURL(attach):string {
+        if (attach.path) {
+            var search = new URLSearchParams();
+            search.set('path', attach.path);
+            search.set('fileName', attach.fileName);
+            search.set('contentType', attach.contentType);
+            return '/api/admin/attach?' + search.toString();
+        } else {
+            return '/api/attach/' + attach.id;
+        }
+    };
 }

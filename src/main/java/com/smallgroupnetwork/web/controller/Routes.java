@@ -14,6 +14,10 @@ class Routes
 	public static final String ACCOUNT = API + ACCOUNT_PATH;
 	public static final String ADMIN_ACCOUNT = ADMIN_API + ACCOUNT_PATH;
 
+	private static final String USER_PATH = "/user";
+	public static final String ADMIN_USER = ADMIN_API + USER_PATH;
+	public static final String USER = API + USER_PATH;
+
 	public static final String STUDY_PATH = "/study";
 	public static final String STUDY = API + STUDY_PATH;
 	public static final String ADMIN_STUDY = ADMIN_API + STUDY_PATH;

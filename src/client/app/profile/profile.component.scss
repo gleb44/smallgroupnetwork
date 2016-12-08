@@ -1,46 +1,55 @@
-.ng-valid[required], .ng-valid.required {
-  border-left: 5px solid #42A948;
-}
+.profile {
 
-.ng-invalid:not(form) {
-  border-left: 5px solid #a94442;
-}
+  .ng-valid[required], .ng-valid.required {
+    border-left: 5px solid #42A948;
+  }
 
-input {
-  width: 100%;
-}
+  .ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+  }
 
-button {
-  display: inline-block;
-  margin: 10px;
-}
+  input {
+    width: 100%;
+  }
 
-.table-container {
-  $table-coll-padding: 0.5em;
+  button {
+    display: inline-block;
+    margin: 10px;
+  }
 
-  width: 100%;
-  margin: auto;
-  padding: 0;
-  display: table;
+  .avatar {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+  }
 
-  .table-row {
-    display: table-row;
+  .table-container {
+    $table-coll-padding: 0.5em;
 
-    .table-left {
-      width: 140px;
-      padding: $table-coll-padding;
-      display: table-cell;
-    }
+    width: 100%;
+    margin: auto;
+    padding: 0;
+    display: table;
 
-    .table-right {
-      width: 150px;
-      padding: $table-coll-padding;
-      display: table-cell;
-    }
+    .table-row {
+      display: table-row;
 
-    .table-middle {
-      padding: $table-coll-padding;
-      display: table-cell;
+      .table-left {
+        width: 140px;
+        padding: $table-coll-padding;
+        display: table-cell;
+      }
+
+      .table-right {
+        width: 150px;
+        padding: $table-coll-padding;
+        display: table-cell;
+      }
+
+      .table-middle {
+        padding: $table-coll-padding;
+        display: table-cell;
+      }
     }
   }
 }

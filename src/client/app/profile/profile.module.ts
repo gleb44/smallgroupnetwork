@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {InputTextModule, ButtonModule, CalendarModule} from 'primeng/primeng';
+import {InputTextModule, ButtonModule, CalendarModule, FileUploadModule} from 'primeng/primeng';
 
 import {ProfileComponent} from './profile.component';
 import {SharedModule} from '../shared/shared.module';
@@ -13,6 +13,7 @@ import {AccountService} from "../shared/index";
         SharedModule,
         InputTextModule,
         CalendarModule,
+        FileUploadModule,
         ButtonModule
     ],
     declarations: [ProfileComponent],

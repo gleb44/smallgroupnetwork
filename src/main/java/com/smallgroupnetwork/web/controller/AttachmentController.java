@@ -71,7 +71,7 @@ public class AttachmentController
 		return getAttachmentView( id, response, webRequest, attachment );
 	}
 
-	protected View getAttachmentView( Long id, HttpServletResponse response, WebRequest webRequest, Attachment attachment )
+	private View getAttachmentView( Long id, HttpServletResponse response, WebRequest webRequest, Attachment attachment )
 	{
 		File file = fileService.getAttachment( id );
 		if( attachment == null || file == null )

@@ -1,11 +1,31 @@
-<div class="sn-wrapper about">
+<div class="sn-wrapper profile">
     <div class="sn-container" *ngIf="user">
         <div class="sn-content ui-g">
             <div class="ui-md-12 ui-sm-12">
                 <h1>PROFILE</h1>
             </div>
-            <div class="ui-g-3"></div>
-            <div class="ui-g-6">
+            <div class="ui-md-6 ui-sm-12">
+                <form (submit)="onSubmit()" #userForm="ngForm" novalidate="novalidate">
+                    <div class="table-container">
+                        <div class="table-row">
+                            <div class="table-left">
+                                <h3 class="first">AVATAR:</h3>
+                            </div>
+                            <div class="table-middle">
+                                <p-fileUpload name="attachment" url="/api/user/avatar" (onUpload)="onUpload($event)"
+                                              accept="image/*" maxFileSize="1000000" auto="auto">
+                                    <template pTemplate type="content">
+                                        <div>
+                                            <div class="avatar" [ngStyle]="{'background-image': 'url(' + avatarURL() + ')', 'background-size': 'cover'}"></div>
+                                        </div>
+                                    </template>
+                                </p-fileUpload>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="ui-md-6 ui-sm-12">
                 <form (submit)="onSubmit()" #userForm="ngForm" novalidate="novalidate">
                     <div class="table-container">
                         <div class="table-row">
@@ -30,11 +50,6 @@
                             </div>
                             <div class="table-middle">
                                 <input id="email" name="email" type="text" pInputText [(ngModel)]="user.email" #lastName="ngModel" required/>
-                            </div>
-                        </div>
-                        <div class="table-row">
-                            <div class="table-middle">
-                                <h3 class="first">AVATAR:</h3>
                             </div>
                         </div>
                         <div class="table-row">
@@ -95,7 +110,7 @@
                     </div>
                 </form>
             </div>
-            <div class="ui-g-3"></div>
+            <!--<div class="ui-g-3"></div>-->
         </div>
     </div>
 </div>
