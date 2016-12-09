@@ -12,6 +12,7 @@ import com.smallgroupnetwork.web.util.OkResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,26 +39,52 @@ public class AccountController
 		return AccountHolder.USER_KEY;
 	}
 
-	private UserAuthentication findAccountAndLogin( String login, String password, HttpSession session )
+	private User findUserByAccount( String login, String password, HttpSession session )
 	{
 		Account account = accountService.findAccount( login, password );
-		User user = userService.read( account.getId() );
+		return userService.read( account.getId() );
+	}
 
+	private void authenticate( User user, HttpSession session )
+	{
 		UserAuthentication authentication = new UserAuthentication();
 		authentication.setUser( user );
 		authentication.setAccessToken( user.getId().toString() );
 
 		session.setAttribute( getSessionKey(), authentication );
+	}
 
-		return authentication;
+	@RequestMapping( value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public User register( @RequestBody Account account, HttpSession session )
+	{
+		User user = new User();
+		userService.saveOrUpdate( user );
+		account.setUser( user );
+		accountService.saveOrUpdate( account );
+
+		authenticate( user, session );
+		return user;
+	}
+
+	@RequestMapping( value = "/update-profile", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public User update( @RequestBody User user, HttpSession session )
+	{
+		userService.merge( user );
+		user = userService.read( user.getId() );
+
+		authenticate( user, session );
+		return user;
 	}
 
 	@RequestMapping( value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public User login( @RequestParam( value = "login" ) String login, @RequestParam( value = "password" ) String password, HttpSession session )
 	{
-		UserAuthentication authentication = findAccountAndLogin( login, password, session );
-		return authentication.getUser();
+		User user = findUserByAccount( login, password, session );
+		authenticate( user, session );
+		return user;
 	}
 
 	@RequestMapping( value = "/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
@@ -88,7 +115,9 @@ public class AccountController
 		HttpSession session )
 	{
 		accountService.changePassword( login, password, newPassword );
-		UserAuthentication authentication = findAccountAndLogin( login, newPassword, session );
-		return authentication.getUser();
+
+		User user = findUserByAccount( login, password, session );
+		authenticate( user, session );
+		return user;
 	}
 }

@@ -48,13 +48,13 @@ export class AccountService extends BaseService {
         return null;
     }
 
-    @POST('user')
+    @POST('register')
     @Produces(MediaType.JSON)
     private create(@Body account:Account):Observable<any> {
         return null;
     }
 
-    @PUT('user')
+    @PUT('update-profile')
     @Produces(MediaType.JSON)
     public update(@Body user:User):Observable<any> {
         return null;

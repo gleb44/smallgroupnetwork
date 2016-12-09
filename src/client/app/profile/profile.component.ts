@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {User, AccountService} from "../shared/index";
+import {User, Profile, AccountService} from "../shared/index";
 import {URLSearchParams} from "@angular/http";
 
 /**
@@ -22,7 +22,12 @@ export class ProfileComponent implements OnInit {
         this.accountService.getInfo().subscribe(info => {
             let user:User = jQuery.extend(true, {}, info);
             user.adminAccess = null;
-            user.profile.birthDate = new Date(user.profile.birthDate);
+            if(!user.profile) {
+                user.profile = new Profile();
+                user.profile.birthDate = null;
+            } else {
+                user.profile.birthDate = new Date( user.profile.birthDate );
+            }
             this.user = user;
         });
     }
