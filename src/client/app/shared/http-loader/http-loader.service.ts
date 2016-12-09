@@ -1,10 +1,8 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {Request} from '@angular/http';
-
-import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
-
-import {HttpLoaderEventEmitter} from '../notification/notification';
+import {Injectable, OnDestroy} from "@angular/core";
+import {Request} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import {Subject} from "rxjs/Subject";
+import {HttpLoaderEventEmitter} from "../notification/notification";
 
 interface IHttpLoaderService {
     process(req:Request, observable:Observable<any>):Observable<any>;
@@ -40,19 +38,15 @@ export class HttpLoaderService implements IHttpLoaderService, OnDestroy {
         this.increment(req.url);
 
         return Observable.create(observer => {
-            observable.subscribe(
-                data => {
-                    this.decrement(req.url);
-
-                    observer.next(data);
-                    observer.complete();
-                },
-                error => {
-                    this.decrement(req.url);
-
-                    observer.error(error);
-                    observer.complete();
-                });
+            observable.subscribe(data => {
+                this.decrement(req.url);
+                observer.next(data);
+            }, error => {
+                this.decrement(req.url);
+                observer.error(error);
+            }, () => {
+                observer.complete();
+            });
         });
     }
 
