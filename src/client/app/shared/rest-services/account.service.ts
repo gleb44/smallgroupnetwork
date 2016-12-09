@@ -55,41 +55,25 @@ export class AccountService extends BaseService {
     }
 
     public updateInfo():Observable<any> {
-        let self = this;
-        this.token = new Promise<any>(function (resolve, reject) {
-            self.info().subscribe(result => {
-                resolve(result);
-            }, error => {
-                reject(error);
-            });
-        });
+        this.token = this.info().toPromise();
         return Observable.fromPromise(this.token);
     }
 
     public login(account:Account):Observable<any> {
-        let self = this;
-        let promise = new Promise<any>(function (resolve, reject) {
-            self.signIn(account.login, account.password).subscribe(result => {
-                resolve(result);
-
-                self.token = promise;
-                self.authEventEmitter.emit(result); // notify login
-            }, error => {
-                reject(error);
-            });
+        let promise = this.signIn(account.login, account.password).toPromise();
+        promise.then(result => {
+            this.token = promise;
+            this.authEventEmitter.emit(result); // notify login
         });
         return Observable.fromPromise(promise);
     }
 
     public logout():Observable<any> {
-        return Observable.create(observer => {
-            this.signOut().subscribe(null, null, () => {
-                this.token = null;
-                this.authEventEmitter.emit(null); // notify logout
-
-                observer.next(true);
-                observer.complete();
-            });
+        let obs = this.signOut().share();
+        obs.subscribe(null, null, () => {
+            this.token = null;
+            this.authEventEmitter.emit(null); // notify logout
         });
+        return obs;
     }
 }
