@@ -30,13 +30,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  signInUser() {
-    this.accountService.login(this.model).subscribe(response => {
-      this.afterSignIn(<Account>response);
+  onRegister() {
+    this.accountService.register(this.model).subscribe(response => {
+      this.afterRegister(<Account>response);
     });
   }
 
-  afterSignIn(user: Account) {
+  afterRegister(user: Account) {
     console.log(user.id);
   }
 }

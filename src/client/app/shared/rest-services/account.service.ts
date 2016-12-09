@@ -42,6 +42,12 @@ export class AccountService extends BaseService {
         return null;
     }
 
+    @POST('user')
+    @Produces(MediaType.JSON)
+    private create(@Body account:Account):Observable<any> {
+        return null;
+    }
+
     @PUT('user')
     @Produces(MediaType.JSON)
     public update(@Body user:User):Observable<any> {
@@ -57,6 +63,15 @@ export class AccountService extends BaseService {
     public updateInfo():Observable<any> {
         this.token = this.info().toPromise();
         return Observable.fromPromise(this.token);
+    }
+
+    public register(account:Account):Observable<any> {
+        let promise = this.create(account).toPromise();
+        promise.then(result => {
+            this.token = promise;
+            this.authEventEmitter.emit(result); // notify login
+        });
+        return Observable.fromPromise(promise);
     }
 
     public login(account:Account):Observable<any> {

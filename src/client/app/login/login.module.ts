@@ -5,7 +5,7 @@ import {InputTextModule, PasswordModule, ButtonModule} from 'primeng/primeng';
 
 import { LoginComponent } from './login.component';
 import { SharedModule } from '../shared/shared.module';
-import { AccountService } from '../shared/index';
+import { UrlTrackingService, AccountService } from '../shared/index';
 
 @NgModule({
   imports: [
@@ -17,6 +17,6 @@ import { AccountService } from '../shared/index';
   ],
   declarations: [LoginComponent],
   exports: [LoginComponent],
-  providers: [AccountService]
+  providers: [UrlTrackingService, AccountService]
 })
 export class LoginModule {}
