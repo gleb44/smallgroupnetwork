@@ -1,12 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Account, User} from '../model/index';
-import {Http} from '@angular/http';
+import {Injectable, OnInit} from "@angular/core";
+import {Account, User} from "../model/index";
+import {Http} from "@angular/http";
 import {Observable} from "rxjs/Rx";
-
-import {GET, PUT, POST, DELETE, BaseUrl, Headers, Header, Produces, MediaType, DefaultHeaders, Path, Body, Query} from './rest-client';
-import {BaseService} from './base.service';
-import {HttpLoaderService} from '../http-loader/index';
-import {HttpErrorHandlerService} from '../http-error-handler/index';
+import {GET, PUT, POST, BaseUrl, Produces, MediaType, DefaultHeaders, Body, Query} from "./rest-client";
+import {BaseService} from "./base.service";
+import {HttpLoaderService} from "../http-loader/index";
+import {HttpErrorHandlerService} from "../http-error-handler/index";
 import {AuthEventEmitter} from "../notification/notification";
 
 @Injectable()
@@ -17,11 +16,18 @@ import {AuthEventEmitter} from "../notification/notification";
 })
 export class AccountService extends BaseService {
 
+    private token:Promise<any> = null;
+
     constructor(protected http:Http,
                 protected httpLoaderService:HttpLoaderService,
                 protected httpErrorHandlerService:HttpErrorHandlerService,
                 private authEventEmitter:AuthEventEmitter) {
         super(http, httpLoaderService, httpErrorHandlerService);
+
+        this.httpErrorHandlerService.onUnauthorizedError.subscribe(error => {
+            this.token = null;
+            this.authEventEmitter.emit(null); // notify logout
+        });
     }
 
     @GET('info')
@@ -53,8 +59,6 @@ export class AccountService extends BaseService {
     public update(@Body user:User):Observable<any> {
         return null;
     }
-
-    private token:Promise<any> = null;
 
     public getInfo():Observable<any> {
         return this.token ? Observable.fromPromise(this.token) : this.updateInfo();

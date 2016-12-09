@@ -22,7 +22,7 @@ export class AuthGuardService implements CanActivate, CanDeactivate<CanComponent
                 this.router.navigate(['login']);
                 observer.next(false);
             }, ()=> {
-                observer.complete()
+                observer.complete();
             });
         });
     }

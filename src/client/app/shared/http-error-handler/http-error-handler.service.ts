@@ -1,9 +1,10 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Output, EventEmitter} from '@angular/core';
 import {Router} from '@angular/router';
 import {Request, RequestMethod} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
 import {ErrorMessagesEventEmitter} from '../notification/notification';
+import {Subscription, Subscriber, Subject} from "rxjs/Rx";
 
 enum ErrorStatus {
     Unauthorized = 401,
@@ -16,6 +17,12 @@ interface IHttpErrorHandlerService {
 
 @Injectable()
 export class HttpErrorHandlerService implements IHttpErrorHandlerService {
+
+    private _onUnauthorizedError:Subject<any> = new Subject<any>();
+
+    get onUnauthorizedError():Subject<any> {
+        return this._onUnauthorizedError;
+    }
 
     constructor(private router:Router, private errorMessagesEventEmitter:ErrorMessagesEventEmitter) {
     }
@@ -34,6 +41,7 @@ export class HttpErrorHandlerService implements IHttpErrorHandlerService {
     }
 
     private process401(err:any):Observable<any> {
+        this._onUnauthorizedError.next(err);
         return Observable.throw(err);
     }
 
