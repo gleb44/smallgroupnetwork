@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -44,7 +43,7 @@ public class UserController
 
 	@RequestMapping( value = { "", "/" }, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public User update( @RequestBody User user, HttpSession session )
+	public User update( @RequestBody User user )
 	{
 		AccountHolder.getUserAuthentication().setUser( userService.merge( user ) );
 		return user;

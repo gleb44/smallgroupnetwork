@@ -2,13 +2,13 @@ import {Injectable} from "@angular/core";
 import {User} from "../model/index";
 import {Http} from "@angular/http";
 import {Observable} from "rxjs/Rx";
-import {PUT, BaseUrl, Produces, MediaType, DefaultHeaders, Body} from "./rest-client";
+import {PUT, BaseUrl, Produces, MediaType, DefaultHeaders, Body, GET, Query, Path} from "./rest-client";
 import {BaseService} from "./base.service";
 import {HttpLoaderService} from "../http-loader/index";
 import {HttpErrorHandlerService} from "../http-error-handler/index";
 
 @Injectable()
-@BaseUrl('/api/user/')
+@BaseUrl('/api/')
 @DefaultHeaders({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
@@ -21,7 +21,22 @@ export class UserService extends BaseService {
         super(http, httpLoaderService, httpErrorHandlerService);
     }
 
-    @PUT('')
+    @GET('admin/user')
+    @Produces(MediaType.JSON)
+    public get(@Query('limit') limit?:number,
+               @Query('offset') offset?:number,
+               @Query('order') order?:string,
+               @Query('sort') sort?:string):Observable<any> {
+        return null;
+    }
+
+    @GET('admin/user/{id}')
+    @Produces(MediaType.JSON)
+    public read(@Path("id") id:string):Observable<any> {
+        return null;
+    }
+
+    @PUT('user')
     @Produces(MediaType.JSON)
     public update(@Body user:User):Observable<any> {
         return null;
