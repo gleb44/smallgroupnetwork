@@ -20,7 +20,7 @@ export = (done: any) => {
 
     let modules: string[] = [];
     for (var prop in Config.SYSTEM_BUILDER_CONFIG_DEV.paths) {
-        console.log('From paths -----> ' + Config.SYSTEM_BUILDER_CONFIG_DEV.paths[prop]);
+        // console.log('From paths -----> ' + Config.SYSTEM_BUILDER_CONFIG_DEV.paths[prop]);
         modules.push(<string>Config.SYSTEM_BUILDER_CONFIG_DEV.paths[prop]);
     }
     gulp.src(modules.filter(d => d.startsWith('node_modules') && d.indexOf('*') == -1), {base: './node_modules'})
@@ -39,9 +39,9 @@ export = (done: any) => {
                 .filter(d => !d.startsWith(Config.DEV_DEST))
                 .map(d => join(Config.PROJECT_ROOT, 'node_modules', d));
 
-            for (var item of paths) {
-                console.log('From packages -----> ' + item);
-            }
+            // for (var item of paths) {
+            //     console.log('From packages -----> ' + item);
+            // }
 
             gulp.src(paths, {base: './node_modules'})
                 .pipe(gulp.dest(Config.JS_DEST));
