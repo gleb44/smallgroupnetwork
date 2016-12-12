@@ -8,12 +8,14 @@ import com.smallgroupnetwork.web.util.AttachmentUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -38,6 +40,14 @@ public class UserController
 		attachment = userService.updateAvatar( user.getId(), attachment );
 		user.setAvatar( attachment );
 		return attachment;
+	}
+
+	@RequestMapping( value = { "", "/" }, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public User update( @RequestBody User user, HttpSession session )
+	{
+		AccountHolder.getUserAuthentication().setUser( userService.merge( user ) );
+		return user;
 	}
 
 }

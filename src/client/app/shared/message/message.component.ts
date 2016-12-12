@@ -1,12 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-
-import {ErrorMessagesEventEmitter} from '../notification/notification';
+import {Component, OnInit} from "@angular/core";
+import {ErrorMessagesEventEmitter} from "../notification/notification";
 
 @Component({
-   moduleId: module.id,
-   selector: 'sd-message',
-   templateUrl: 'message.component.html',
-   styleUrls: ['message.component.css'],
+    moduleId: module.id,
+    selector: 'sd-message',
+    templateUrl: 'message.component.html',
+    styleUrls: ['message.component.css'],
 })
 
 export class MessageComponent implements OnInit {

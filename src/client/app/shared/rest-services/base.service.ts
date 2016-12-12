@@ -1,9 +1,8 @@
-import {Http, Request} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-
-import {RESTClient} from './rest-client';
-import {HttpLoaderService} from '../http-loader/index';
-import {HttpErrorHandlerService} from '../http-error-handler/index';
+import {Http, Request} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import {RESTClient} from "./rest-client";
+import {HttpLoaderService} from "../http-loader/index";
+import {HttpErrorHandlerService} from "../http-error-handler/index";
 
 export abstract class BaseService extends RESTClient {
 

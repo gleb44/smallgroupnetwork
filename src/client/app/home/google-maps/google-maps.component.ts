@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { MouseEvent } from 'angular2-google-maps/core';
+import {Component} from "@angular/core";
+import {MouseEvent} from "angular2-google-maps/core";
 
 interface Marker {
-    lat: number;
-    lng: number;
-    label?: string;
-    draggable?: boolean;
+    lat:number;
+    lng:number;
+    label?:string;
+    draggable?:boolean;
 }
 
 /**
@@ -20,12 +20,12 @@ interface Marker {
 
 export class GoogleMapsComponent {
     // Google Maps zoom level
-    zoom: number = 8;
+    zoom:number = 8;
     // Initial center position for the map
-    lat: number = 51.673858;
-    lng: number = 7.815982;
+    lat:number = 51.673858;
+    lng:number = 7.815982;
 
-    markers: Marker[] = [
+    markers:Marker[] = [
         {
             lat: 51.673858,
             lng: 7.815982,
@@ -40,11 +40,11 @@ export class GoogleMapsComponent {
         }
     ];
 
-    clickedMarker(label: string, index: number) {
+    clickedMarker(label:string, index:number) {
         console.log(`Clicked the marker: ${label || index}`);
     }
 
-    mapClicked($event: MouseEvent) {
+    mapClicked($event:MouseEvent) {
         console.log('AddMarker', $event);
         this.markers.push({
             lat: $event.coords.lat,
@@ -52,7 +52,7 @@ export class GoogleMapsComponent {
         });
     }
 
-    markerDragEnd(m: Marker, $event: MouseEvent) {
+    markerDragEnd(m:Marker, $event:MouseEvent) {
         console.log('DragEnd', m, $event);
     }
 }

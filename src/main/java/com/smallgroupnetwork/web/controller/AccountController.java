@@ -58,24 +58,9 @@ public class AccountController
 	@ResponseBody
 	public User register( @RequestBody Account account, HttpSession session )
 	{
-		User user = new User();
-		userService.saveOrUpdate( user );
-		account.setUser( user );
-		accountService.saveOrUpdate( account );
-
-		authenticate( user, session );
-		return user;
-	}
-
-	@RequestMapping( value = "/update-profile", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
-	@ResponseBody
-	public User update( @RequestBody User user, HttpSession session )
-	{
-		userService.merge( user );
-		user = userService.read( user.getId() );
-
-		authenticate( user, session );
-		return user;
+		Account result = accountService.register( account );
+		authenticate( result.getUser(), session );
+		return result.getUser();
 	}
 
 	@RequestMapping( value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )

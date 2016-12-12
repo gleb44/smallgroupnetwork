@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from "@angular/core";
 
 /**
  * This class represents the lazy loaded AdminComponent.
@@ -10,4 +10,5 @@ import { Component } from '@angular/core';
     styleUrls: ['admin.component.css']
 })
 
-export class AdminComponent {}
+export class AdminComponent {
+}

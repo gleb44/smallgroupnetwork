@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from "@angular/core";
 
 /**
  * This class represents the navigation bar component.
@@ -10,4 +10,5 @@ import { Component } from '@angular/core';
     styleUrls: ['footer.component.css'],
 })
 
-export class FooterComponent { }
+export class FooterComponent {
+}

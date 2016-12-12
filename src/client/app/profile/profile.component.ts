@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {User, Profile, AccountService} from "../shared/index";
+import {User, Profile, UserService, AuthService} from "../shared/index";
 import {URLSearchParams} from "@angular/http";
 
 /**
@@ -15,18 +15,18 @@ export class ProfileComponent implements OnInit {
 
     public user:User;
 
-    constructor(private accountService:AccountService) {
+    constructor(private userService:UserService, private authService:AuthService) {
     }
 
     private init() {
-        this.accountService.getInfo().subscribe(info => {
+        this.authService.getInfo().subscribe(info => {
             let user:User = jQuery.extend(true, {}, info);
             user.adminAccess = null;
-            if(!user.profile) {
+            if (!user.profile) {
                 user.profile = new Profile();
                 user.profile.birthDate = null;
             } else {
-                user.profile.birthDate = new Date( user.profile.birthDate );
+                user.profile.birthDate = new Date(user.profile.birthDate);
             }
             this.user = user;
         });
@@ -43,9 +43,9 @@ export class ProfileComponent implements OnInit {
     onSubmit() {
         let user:User = jQuery.extend(true, {}, this.user);
         user.profile.birthDate = user.profile.birthDate ? user.profile.birthDate.getTime() : null;
-        this.accountService.update(user).subscribe(response => {
+        this.userService.update(user).subscribe(response => {
             console.log('User Updated...');
-            this.accountService.updateInfo();
+            this.authService.updateInfo();
         });
     }
 
@@ -56,7 +56,7 @@ export class ProfileComponent implements OnInit {
     onUpload(event) {
         this.user.avatar = JSON.parse(event.xhr.response);
         console.log('User Avatar Updated...');
-        this.accountService.updateInfo();
+        this.authService.updateInfo();
     }
 
     avatarURL():string {

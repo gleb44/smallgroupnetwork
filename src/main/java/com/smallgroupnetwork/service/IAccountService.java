@@ -10,6 +10,8 @@ import com.smallgroupnetwork.persistence.IPersistenceService;
  */
 public interface IAccountService extends IPersistenceService<Account, Long>
 {
+	Account register(Account account);
+
 	Account findAccount( String login, String password );
 
 	Account findByLogin( final String login );

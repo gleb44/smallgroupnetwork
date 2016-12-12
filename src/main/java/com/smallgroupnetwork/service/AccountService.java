@@ -1,9 +1,11 @@
 package com.smallgroupnetwork.service;
 
 import com.smallgroupnetwork.model.Account;
+import com.smallgroupnetwork.model.User;
 import com.smallgroupnetwork.persistence.AbstractPersistenceService;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,9 @@ public class AccountService extends AbstractPersistenceService<Account, Long> im
 {
 	@Resource( name = "passwordEncoder" )
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private IUserService userService;
 
 	@Override
 	@Transactional
@@ -43,6 +48,18 @@ public class AccountService extends AbstractPersistenceService<Account, Long> im
 			addValidationResult( "login", "account.login.duplicate", account.getLogin() );
 			validate();
 		}
+	}
+
+	@Override
+	@Transactional
+	public Account register( Account account )
+	{
+		User user = new User();
+		userService.saveOrUpdate( user );
+
+		account.setUser( user );
+		saveOrUpdate( account );
+		return account;
 	}
 
 	@Override

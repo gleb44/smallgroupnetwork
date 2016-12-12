@@ -16,7 +16,7 @@ export class AppComponent {
 
     constructor(urlTrackingService:UrlTrackingService) {
         // Start url tracking
-        
+
         console.log('Environment config', Config);
     }
 

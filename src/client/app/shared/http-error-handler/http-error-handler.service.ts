@@ -1,10 +1,9 @@
-import {Injectable, Output, EventEmitter} from '@angular/core';
-import {Router} from '@angular/router';
-import {Request, RequestMethod} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-
-import {ErrorMessagesEventEmitter} from '../notification/notification';
-import {Subscription, Subscriber, Subject} from "rxjs/Rx";
+import {Injectable} from "@angular/core";
+import {Router} from "@angular/router";
+import {Request, RequestMethod} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import {ErrorMessagesEventEmitter} from "../notification/notification";
+import {Subject} from "rxjs/Rx";
 
 enum ErrorStatus {
     Unauthorized = 401,
@@ -62,22 +61,22 @@ export class HttpErrorHandlerService implements IHttpErrorHandlerService {
         for (var item of errList) {
             if (item.messageCode) {
                 messageList.push({
-                                     name: item.name,
-                                     msg: item.message,
-                                     trace: item.trace
-                                 });
+                    name: item.name,
+                    msg: item.message,
+                    trace: item.trace
+                });
             } else if (item.message) {
                 messageList.push({
-                                     name: item.name,
-                                     msg: item.message,
-                                     trace: item.trace
-                                 });
+                    name: item.name,
+                    msg: item.message,
+                    trace: item.trace
+                });
             } else if (item.reason) {
                 messageList.push({
-                                     name: item.name,
-                                     msg: 'Operation ' + RequestMethod[req.method] + ' Error. Reason: ' + item.reason,
-                                     trace: item.trace
-                                 });
+                    name: item.name,
+                    msg: 'Operation ' + RequestMethod[req.method] + ' Error. Reason: ' + item.reason,
+                    trace: item.trace
+                });
             } else {
                 console.warn('Unhandled error!');
             }

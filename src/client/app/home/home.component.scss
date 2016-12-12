@@ -3,10 +3,12 @@
     width: 100%;
     background-image: url("./assets/img/newhomepage.png");
     background-size: 100% 100%;
+
     .home-top-content {
       .banner-block {
         height: 100%;
         padding-top: 15%;
+
         .banner {
           width: 90%;
           font-size: 26px;
@@ -20,12 +22,13 @@
 
       .login-block {
         margin: 10px 0 5px;
+
         .login-container {
-          background-color: rgba(255,255,255,0.5);
+          background-color: rgba(255, 255, 255, 0.5);
           margin: 10px 0;
-          -webkit-box-shadow: 0px 3px 3px 0px rgba(102,102,102,1);
-          -moz-box-shadow: 0px 3px 3px 0px rgba(102,102,102,1);
-          box-shadow: 0px 3px 3px 0px rgba(102,102,102,1);
+          -webkit-box-shadow: 0px 3px 3px 0px rgba(102, 102, 102, 1);
+          -moz-box-shadow: 0px 3px 3px 0px rgba(102, 102, 102, 1);
+          box-shadow: 0px 3px 3px 0px rgba(102, 102, 102, 1);
 
           .login-form {
             padding: 60px 20px 10px 20px;
@@ -38,7 +41,6 @@
             p {
               font-size: 14px;
             }
-
           }
         }
       }
@@ -47,7 +49,6 @@
 }
 
 @media screen and (max-width: 40em) {
-
   .home {
     .home-top {
       .home-top-content {

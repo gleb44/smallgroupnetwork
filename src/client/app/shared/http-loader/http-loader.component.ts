@@ -1,12 +1,11 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-
-import {HttpLoaderEventEmitter} from '../notification/notification';
+import {Component, OnInit, ElementRef} from "@angular/core";
+import {HttpLoaderEventEmitter} from "../notification/notification";
 
 @Component({
-   moduleId: module.id,
-   selector: 'sd-http-loader',
-   templateUrl: 'http-loader.component.html',
-   styleUrls: ['http-loader.component.css'],
+    moduleId: module.id,
+    selector: 'sd-http-loader',
+    templateUrl: 'http-loader.component.html',
+    styleUrls: ['http-loader.component.css'],
 })
 
 export class HttpLoaderComponent implements OnInit {

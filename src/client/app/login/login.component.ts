@@ -1,7 +1,6 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-
-import {UrlTrackingService, AccountService, Account} from '../shared/index';
+import {Component} from "@angular/core";
+import {Router} from "@angular/router";
+import {UrlTrackingService, AuthService, Account} from "../shared/index";
 
 /**
  * This class represents the lazy loaded LoginComponent.
@@ -17,11 +16,13 @@ export class LoginComponent {
 
     model = new Account();
 
-    constructor(public router:Router, private urlTrackingService:UrlTrackingService, public accountService:AccountService) {
+    constructor(public router:Router,
+                private urlTrackingService:UrlTrackingService,
+                public authService:AuthService) {
     }
 
     signInUser() {
-        this.accountService.login(this.model).subscribe(response => {
+        this.authService.login(this.model).subscribe(response => {
             this.afterSignIn(<Account>response);
         });
     }

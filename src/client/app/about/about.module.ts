@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AboutComponent } from './about.component';
+import {NgModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
+import {AboutComponent} from "./about.component";
 
 @NgModule({
     imports: [CommonModule],
@@ -8,4 +8,5 @@ import { AboutComponent } from './about.component';
     exports: [AboutComponent]
 })
 
-export class AboutModule { }
+export class AboutModule {
+}
