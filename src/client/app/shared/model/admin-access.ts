@@ -1,7 +1,8 @@
 import {BaseModel} from "./base-model";
 
 export enum AdminRole {
-    Admin, Staff
+    Admin = <any>'Admin',
+    Staff = <any>'Staff'
 }
 
 export class AdminAccess extends BaseModel {

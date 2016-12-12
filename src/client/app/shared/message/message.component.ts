@@ -18,7 +18,9 @@ export class MessageComponent implements OnInit {
 
     ngOnInit() {
         this.errorMessagesEventEmitter.subscribe(messages => {
-            this.showMsg({items: messages, type: 'danger'});
+            this.showMsg({
+                items: messages.map(item => (typeof item === 'string') ? {msg: item} : item), type: 'danger'
+            });
         });
     }
 
