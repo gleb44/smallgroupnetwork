@@ -22,7 +22,9 @@
                             </p-column>
                             <p-column styleClass="col-button">
                                 <template let-car="rowData" pTemplate type="body">
-                                    <button type="button" pButton (click)="selectCar(car)" icon="fa-search">Edit</button>
+                                    <button type="button" pButton (click)="selectCar(car)" icon="fa-search">
+                                        <span class="ui-button-icon-left ui-c fa fa-fw fa-search"></span>
+                                    </button>
                                 </template>
                             </p-column>
                         </p-dataTable>

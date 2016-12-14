@@ -251,6 +251,17 @@ export class ProjectConfig {
   ];
 
   /**
+   * The folder for the built Font images files.
+   * @type {string}
+   */
+  CSS_IMAGE_DEST = `${this.CSS_DEST}/images`;
+
+  CSS_IMAGE_SRC: [any] = [
+    'node_modules/primeng/resources/images/**',
+    'node_modules/primeng/resources/themes/bootstrap/images/**'
+  ];
+
+  /**
    * The list of NPM dependcies to be injected in the `index.html`.
    * @type {InjectableDependency[]}
    */
