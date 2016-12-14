@@ -22,8 +22,7 @@ export = () => {
   let tsProject = makeTsProject({}, Config.TMP_DIR);
   let src = [
     Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
-    join(Config.TMP_DIR, '**/*.ts'),
-    '!' + join(Config.TMP_DIR, `**/${Config.NG_FACTORY_FILE}.ts`)
+    join(Config.TMP_DIR, '**/*.ts')
   ];
   let result = gulp.src(src)
       .pipe(plugins.plumber())

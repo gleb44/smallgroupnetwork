@@ -25,10 +25,7 @@ export =
         Config.TOOLS_DIR + '/manual_typings/**/*.d.ts'
       ]);
       let src = [
-        join(Config.APP_SRC, '**/*.ts'),
-        '!' + join(Config.APP_SRC, '**/*.spec.ts'),
-        '!' + join(Config.APP_SRC, '**/*.e2e-spec.ts'),
-        '!' + join(Config.APP_SRC, `**/${Config.NG_FACTORY_FILE}.ts`)
+        join(Config.APP_SRC, '**/*.ts')
       ];
 
       let projectFiles = gulp.src(src);

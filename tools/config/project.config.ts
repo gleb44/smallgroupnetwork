@@ -97,10 +97,6 @@ export class ProjectConfig {
 
   BOOTSTRAP_PROD_MODULE = `${this.BOOTSTRAP_DIR}/` + 'main';
 
-  NG_FACTORY_FILE = 'main-prod';
-
-  BOOTSTRAP_FACTORY_PROD_MODULE = `${this.BOOTSTRAP_DIR}/${this.NG_FACTORY_FILE}`;
-
   /**
    * The base folder of the applications source files.
    * @type {string}
@@ -343,13 +339,6 @@ export class ProjectConfig {
   SYSTEM_CONFIG_DEV_MODIFIED: string = JSON.stringify(this.SYSTEM_BUILDER_CONFIG_DEV, function(k, v) {
     return (typeof v === 'string') ? v.replace('node_modules', 'js') : v;
   });
-
-  /**
-   * The configuration of SystemJS of the application.
-   * Per default, the configuration of the `dev` environment will be used.
-   * @type {any}
-   */
-  SYSTEM_CONFIG: any = this.SYSTEM_BUILDER_CONFIG_DEV;
 
   /**
    * The system builder configuration of the application.
