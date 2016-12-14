@@ -11,7 +11,6 @@
     window.AppConfig = {
         appPath: "<@spring.url "/"/>",
         baseUrl: "${baseUrl}/",
-        crazyEggKey: "00527990",
-        optimizelyKey: "6512121647"
+        buildEnv: "${buildEnv}"
     };
 </script>

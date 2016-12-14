@@ -17,7 +17,7 @@ export = () => {
     .pipe(inject('shims'))
     .pipe(inject('libs'))
     .pipe(inject())
-    .pipe(plugins.template(new TemplateLocalsBuilder().withoutStringifiedEnvConfig().build()))
+    .pipe(plugins.template(new TemplateLocalsBuilder().build()))
     .pipe(gulp.dest(Config.INDEX_DEST));
 };
 

@@ -1,7 +1,6 @@
 import {Component} from "@angular/core";
-import {Config} from "./shared/index";
 import "./operators";
-import {UrlTrackingService} from "./shared/url-tracking/url-tracking.service";
+import {UrlTrackingService} from "./shared/index";
 
 /**
  * This class represents the main application component.
@@ -16,8 +15,6 @@ export class AppComponent {
 
     constructor(urlTrackingService:UrlTrackingService) {
         // Start url tracking
-
-        console.log('Environment config', Config);
     }
 
 }

@@ -7,9 +7,9 @@
   },
   "scripts": {
     "clean.app": "gulp clean.application --color",
-    "build.dev": "gulp build.dev --color --env-config dev",
+    "build.dev": "gulp build.dev --color",
     "build.dev.watch": "gulp build.dev.watch --color",
-    "build.prod": "gulp build.prod --color --env-config prod --build-type prod",
+    "build.prod": "gulp build.prod --color --build-type prod",
     "gulp": "gulp",
     "lint": "gulp tslint",
     "clean.tools": "gulp clean.build.tools",

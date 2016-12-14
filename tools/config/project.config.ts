@@ -454,9 +454,6 @@ export class ProjectConfig {
       injectChanges: false,
     },
 
-    // Note: you can customize the location of the file
-    'environment-config': join(this.PROJECT_ROOT, this.TOOLS_DIR, 'env'),
-
     /**
      * The options to pass to gulp-sass (and then to node-sass).
      * Reference: https://github.com/sass/node-sass#options

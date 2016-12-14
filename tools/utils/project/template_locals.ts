@@ -1,7 +1,3 @@
-import * as util from 'gulp-util';
-import { argv } from 'yargs';
-import { join } from 'path';
-
 import Config from '../../config';
 
 /**
@@ -11,49 +7,18 @@ import Config from '../../config';
  */
 export class TemplateLocalsBuilder {
   private stringifySystemConfigDev = false;
-  private stringifyEnvConfig = true;
 
   withStringifiedSystemConfigDev() {
     this.stringifySystemConfigDev = true;
     return this;
   }
-  withoutStringifiedEnvConfig() {
-    this.stringifyEnvConfig = false;
-    return this;
-  }
 
   build() {
-    const configEnvName = argv['env-config'] || argv['config-env'] || 'dev';
-    const configPath = Config.getPluginConfig('environment-config');
-    const envOnlyConfig = this.getConfig(configPath, configEnvName);
-    const baseConfig = this.getConfig(configPath, 'base');
-
-    if (!envOnlyConfig) {
-      throw new Error(configEnvName + ' is an invalid configuration name');
-    }
-
-    const envConfig = Object.assign({}, baseConfig, envOnlyConfig);
-    let locals = Object.assign({},
-                               Config,
-                               { ENV_CONFIG: this.stringifyEnvConfig ? JSON.stringify(envConfig) : envConfig }
-    );
+    let locals = Object.assign({}, Config);
     if (this.stringifySystemConfigDev) {
       Object.assign(locals, {SYSTEM_CONFIG_DEV: JSON.stringify(Config.SYSTEM_BUILDER_CONFIG_DEV)});
     }
     return locals;
   }
-
-  private getConfig(path: string, env: string) {
-    const configPath = join(path, env);
-    let config: any;
-    try {
-      config = JSON.parse(JSON.stringify(require(configPath)));
-    } catch (e) {
-      config = null;
-      util.log(util.colors.red(e.message));
-    }
-
-    return config;
-  };
 }
 
