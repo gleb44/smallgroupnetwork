@@ -25,8 +25,8 @@ export class UserService extends BaseService {
     @Produces(MediaType.JSON)
     public get(@Query('limit') limit?:number,
                @Query('offset') offset?:number,
-               @Query('order') order?:string,
-               @Query('sort') sort?:string):Observable<any> {
+               @Query('sortDesc') sortDesc?:boolean,
+               @Query('sortColumn') sortColumn?:string):Observable<any> {
         return null;
     }
 

@@ -3,6 +3,7 @@
  */
 export * from './navbar/index';
 export * from './model/index';
+export * from './infinite-scroll/index';
 export * from './auth/index';
 export * from './message/index';
 export * from './rest-services/index';

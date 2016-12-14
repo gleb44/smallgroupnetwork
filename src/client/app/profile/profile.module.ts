@@ -15,11 +15,7 @@ import {UserService, AuthService} from "../shared/index";
         ButtonModule
     ],
     declarations: [ProfileComponent],
-    exports: [ProfileComponent],
-    providers: [
-        UserService,
-        AuthService
-    ]
+    exports: [ProfileComponent]
 })
 
 export class ProfileModule {

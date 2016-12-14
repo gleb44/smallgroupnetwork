@@ -1,6 +1,13 @@
 import {Router, UrlTree} from "@angular/router";
 
-export class QueryFilter {
+export interface IQueryFilter {
+    isFilterChanged(syncOldValues):boolean;
+    setFilterDataFromUrl():void;
+    updateUrlByFilterData():void;
+    makeFilterRequest():any;
+}
+
+export class QueryFilter implements IQueryFilter {
 
     public filter:any;
 

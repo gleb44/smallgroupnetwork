@@ -5,7 +5,6 @@ import {AgmCoreModule} from "angular2-google-maps/core";
 import {GoogleMapsComponent} from "./google-maps/index";
 import {HomeComponent} from "./home.component";
 import {SharedModule} from "../shared/shared.module";
-import {AuthService} from "../shared/index";
 
 @NgModule({
     imports: [
@@ -25,8 +24,7 @@ import {AuthService} from "../shared/index";
     exports: [
         HomeComponent,
         GoogleMapsComponent
-    ],
-    providers: [AuthService]
+    ]
 })
 export class HomeModule {
 }

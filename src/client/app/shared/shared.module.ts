@@ -10,6 +10,8 @@ import {UserService, AccountService} from "./rest-services/index";
 import {HttpErrorHandlerService} from "./http-error-handler/index";
 import {HttpLoaderService, HttpLoaderComponent} from "./http-loader/index";
 import {AuthGuardService, AuthService} from "./auth/index";
+import {InfiniteScroll} from "./infinite-scroll/index";
+import {UrlTrackingService} from "./url-tracking/url-tracking.service";
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -18,22 +20,26 @@ import {AuthGuardService, AuthService} from "./auth/index";
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule
+        RouterModule,
+        FormsModule
     ],
     declarations: [
         NavbarComponent,
         FooterComponent,
         HttpLoaderComponent,
-        MessageComponent
+        MessageComponent,
+        InfiniteScroll
     ],
     exports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+
         NavbarComponent,
         FooterComponent,
         HttpLoaderComponent,
         MessageComponent,
-        CommonModule,
-        FormsModule,
-        RouterModule
+        InfiniteScroll
     ]
 })
 export class SharedModule {
@@ -42,6 +48,7 @@ export class SharedModule {
             ngModule: <any>SharedModule,
             providers: [
                 NOTIFICATION_PROVIDERS,
+                <any>UrlTrackingService,
                 <any>HttpErrorHandlerService,
                 <any>HttpLoaderService,
 
