@@ -23,8 +23,9 @@ export class ProfileComponent implements OnInit {
             let user:User = jQuery.extend(true, {}, info);
             user.adminAccess = null;
             if (!user.profile) {
-                user.profile = new Profile();
-                user.profile.birthDate = null;
+                user.profile = <Profile> {
+                    birthDate: null
+                };
             } else {
                 user.profile.birthDate = new Date(user.profile.birthDate);
             }
