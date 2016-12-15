@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
 
     private init() {
         this.authService.getInfo().subscribe(info => {
-            let user:User = jQuery.extend(true, {}, info);
+            let user:User = Object.assign({}, info);
             user.adminAccess = null;
             if (!user.profile) {
                 user.profile = <Profile> {
@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
     }
 
     onSubmit() {
-        let user:User = jQuery.extend(true, {}, this.user);
+        let user:User = Object.assign({}, this.user);
         user.profile.birthDate = user.profile.birthDate ? user.profile.birthDate.getTime() : null;
         this.userService.update(user).subscribe(response => {
             console.log('User Updated...');
