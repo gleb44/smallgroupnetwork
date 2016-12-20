@@ -7,9 +7,11 @@ import com.smallgroupnetwork.security.UserAuthentication;
 import com.smallgroupnetwork.service.IAccountService;
 import com.smallgroupnetwork.service.IUserService;
 import com.smallgroupnetwork.web.exception.UnauthorizedException;
+import com.smallgroupnetwork.web.livenotification.IUserSessionManager;
 import com.smallgroupnetwork.web.util.DefaultMessages;
 import com.smallgroupnetwork.web.util.OkResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +35,9 @@ public class AccountController
 	private IAccountService accountService;
 	@Autowired
 	private IUserService userService;
+	@Autowired
+	@Qualifier( "userSessionManager" )
+	private IUserSessionManager userSessionManager;
 
 	private String getSessionKey()
 	{
@@ -45,13 +50,15 @@ public class AccountController
 		return userService.read( account.getId() );
 	}
 
-	private void authenticate( User user, HttpSession session )
+	private UserAuthentication authenticate( User user, HttpSession session )
 	{
 		UserAuthentication authentication = new UserAuthentication();
 		authentication.setUser( user );
 		authentication.setAccessToken( user.getId().toString() );
 
-		session.setAttribute( getSessionKey(), authentication );
+		session.setAttribute( getSessionKey(), authentication.getUser().getId() );
+
+		return authentication;
 	}
 
 	@RequestMapping( value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
@@ -59,7 +66,11 @@ public class AccountController
 	public User register( @RequestBody Account account, HttpSession session )
 	{
 		Account result = accountService.register( account );
-		authenticate( result.getUser(), session );
+		UserAuthentication authentication = authenticate( result.getUser(), session );
+
+		//store in global storage instead of session
+		userSessionManager.onUserLogin( authentication, session.getId() );
+
 		return result.getUser();
 	}
 
@@ -68,7 +79,11 @@ public class AccountController
 	public User login( @RequestParam( value = "login" ) String login, @RequestParam( value = "password" ) String password, HttpSession session )
 	{
 		User user = findUserByAccount( login, password, session );
-		authenticate( user, session );
+		UserAuthentication authentication = authenticate( user, session );
+
+		//store in global storage instead of session
+		userSessionManager.onUserLogin( authentication, session.getId() );
+
 		return user;
 	}
 
@@ -76,19 +91,32 @@ public class AccountController
 	@ResponseBody
 	public User info( HttpSession session )
 	{
-		UserAuthentication authentication = (UserAuthentication) session.getAttribute( getSessionKey() );
-		if( authentication == null )
+		Long sessionData = (Long) session.getAttribute( getSessionKey() );
+		if( sessionData == null )
 		{
-			throw new UnauthorizedException();
+			return null;
 		}
-		return authentication.getUser();
+		UserAuthentication subject = userSessionManager.getUserInfo( sessionData );
+		if( subject == null )
+		{
+			return null;
+		}
+		else
+		{
+			return subject.getUser();
+		}
 	}
 
 	@RequestMapping( value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public OkResponse logout( HttpSession session )
 	{
+		Long userId = (Long) session.getAttribute( getSessionKey() );
 		session.removeAttribute( getSessionKey() );
+		if( userId != null )
+		{
+			userSessionManager.onUserLogout( userId, session.getId() );
+		}
 		return DefaultMessages.OK_RESPONSE;
 	}
 
