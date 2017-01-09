@@ -1,6 +1,5 @@
 package com.smallgroupnetwork.web.livenotification;
 
-import com.smallgroupnetwork.model.Group;
 import com.smallgroupnetwork.security.UserAuthentication;
 
 /**
@@ -16,6 +15,4 @@ public interface IUserSessionManager
 	void onUserLogout( Long userId, String httpSessionId );
 
 	UserAuthentication getUserInfo( Long userId );
-
-	void initOnlineStatus( Group group );
 }

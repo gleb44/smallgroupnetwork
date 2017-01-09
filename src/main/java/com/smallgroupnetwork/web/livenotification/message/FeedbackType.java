@@ -7,10 +7,5 @@ package com.smallgroupnetwork.web.livenotification.message;
  */
 public enum FeedbackType
 {
-	PostRead,
-	ChatMessageRead,
-
-	// AdminActivity
-	GroupAdminActivityRead,
-	AdminNotificationRead
+	ChatMessageRead
 }
